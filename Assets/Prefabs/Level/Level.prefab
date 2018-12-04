@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 114523423629491618}
   - component: {fileID: 64154519615849028}
   - component: {fileID: 54992896836657710}
+  - component: {fileID: 65760458721321828}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -3813,7 +3814,7 @@ MeshCollider:
   m_GameObject: {fileID: 1524534303024560}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -4085,6 +4086,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65760458721321828
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524534303024560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.63, y: 0.59, z: 0.99}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65768426880380542
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4232,7 +4245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e90cca3d8e4744eb309b2ecd149b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NoSpace: 0
+  Space: 1
 --- !u!114 &114276720129304108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4350,7 +4363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e90cca3d8e4744eb309b2ecd149b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NoSpace: 0
+  Space: 1
 --- !u!114 &114813088030360848
 MonoBehaviour:
   m_ObjectHideFlags: 1

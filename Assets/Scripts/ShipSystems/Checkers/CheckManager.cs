@@ -23,7 +23,7 @@ public class CheckManager : MonoBehaviour {
     public bool ShipWallCollision;
     public bool ShipObstacleCollision;
 
-    private void Update()
+    private void FixedUpdate()
     {
         AllowLeftTentacle = LeftChecker.Space;
         AllowRightTentacle = RightChecker.Space;

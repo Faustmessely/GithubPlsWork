@@ -28,7 +28,7 @@ public class TileMotionBehaviour : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
         //DetectDespawn();

@@ -34,7 +34,7 @@ public class RotationSystem : MonoBehaviour {
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         RecalculateRotation();
         ReturnRotation();
