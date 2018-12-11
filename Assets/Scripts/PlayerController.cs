@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     public string throwing = "Throwing_P1";
     public string interact2 = "Interact2_P1";
     string[] scriptID;
-    public GameObject bullet;
+    bool _interactableNearby = false;
+   // public GameObject bullet;
     Vector3 oudePos;
     bool currentTargetObjectInGebruik;
     private void Start()
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
         controller = this.GetComponent<CharacterController>();
         //Maak array aan met alle mogelijke interactable scripts;
         scriptID = new string[] {"Bullet", "Cannon"};
-        oudePos = bullet.transform.position;
+     //   oudePos = bullet.transform.position;
 
     }
 
@@ -43,13 +44,13 @@ public class PlayerController : MonoBehaviour
     {
       
 
-        if (Input.GetButtonDown(interactable))
-        {
+        //if (Input.GetButtonDown(interactable))
+        //{
            
-            GameObject newBullet = Instantiate(bullet, oudePos, Quaternion.identity);
-            newBullet.name = bullet.name;
+        //    GameObject newBullet = Instantiate(bullet, oudePos, Quaternion.identity);
+        //    newBullet.name = bullet.name;
 
-        }
+        //}
 
     }
 
@@ -90,25 +91,22 @@ public class PlayerController : MonoBehaviour
         transformold = transform.rotation;
     }
 
-    private void ScriptIdLoop()
-    {
-    }
 
     private void Interactables()
     {
 
-        //Check voor interactables       
+        ////Check voor interactables       
         _hitInfo = new RaycastHit();
         fwd = transform.TransformDirection(Vector3.forward);
         // Bit shift the index of the layer (8) to get a bit mask
         int _layerMask = 1 << 10;
         //inverse bitmask layer
         //_layerMask = ~_layerMask;!handig
-        _hit = Physics.Raycast(transform.position, fwd, out _hitInfo, 0.2f, _layerMask);
+        _hit = Physics.Raycast(transform.position, fwd, out _hitInfo, 2f, _layerMask);
         Debug.DrawRay(transform.position, transform.forward, Color.green);
-        if (_hit)//Als de raycast iets hit & _targetobject verwijst nog niet naar het object
+        if (_hitInfo.collider)//Als de raycast iets hit & _targetobject verwijst nog niet naar het object
         {
-
+            Debug.Log("werkt");
             if (_targetObject == null)
             {
                 _targetObject = _hitInfo.transform.gameObject;
@@ -174,6 +172,19 @@ public class PlayerController : MonoBehaviour
         Interactables();
     }
 
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    _interactableNearby = true;
+    //    if(_targetObject == null)
+    //    {
+    //        _targetObject = other.transform.gameObject;
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    _interactableNearby = false;
+    //}
 
     //void OnDrawGizmos()
     //{
