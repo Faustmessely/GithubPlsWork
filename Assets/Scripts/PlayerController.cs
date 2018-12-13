@@ -57,7 +57,8 @@ public class PlayerController : MonoBehaviour
     private void Movement()
     {
         //horizontal movement
-        _horizontalMovement = new Vector3(Input.GetAxis(horizontal), 0f, Input.GetAxis(vertical));
+        
+            _horizontalMovement = new Vector3(Input.GetAxis(horizontal), 0f, Input.GetAxis(vertical));
         if (_horizontalMovement.magnitude > 1f) { _horizontalMovement.Normalize(); }
         _horizontalMovement *= (speed * Time.deltaTime);
         //vertical movement(grav)
@@ -79,14 +80,16 @@ public class PlayerController : MonoBehaviour
 
 
         //look direction
-        if (_horizontalMovement != Vector3.zero)
+        if (_horizontalMovement != Vector3.zero && _horizontalMovement.sqrMagnitude > 0.1f)
         {
-            transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(_horizontalMovement), 0.2f);
-        }
+
+      
+             transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(  _horizontalMovement), 0.2f);
+       
 
         //final movement
         controller.Move(moveDirection);
-
+        }
         transformold = transform.rotation;
     }
 
