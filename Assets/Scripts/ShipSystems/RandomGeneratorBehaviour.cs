@@ -33,7 +33,8 @@ public class RandomGeneratorBehaviour : MonoBehaviour {
         Spawner = _spawner;
         RandomGenerator = this.gameObject;
 
-        _lastTrans = TileMotionBehaviour.LastInLine.transform;
+
+
     }
     
 

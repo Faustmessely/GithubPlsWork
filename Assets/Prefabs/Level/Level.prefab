@@ -678,10 +678,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4533564375120346}
   - component: {fileID: 95473939675051062}
-  - component: {fileID: 114523423629491618}
   - component: {fileID: 64154519615849028}
   - component: {fileID: 54992896836657710}
   - component: {fileID: 65760458721321828}
+  - component: {fileID: 114523423629491618}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
