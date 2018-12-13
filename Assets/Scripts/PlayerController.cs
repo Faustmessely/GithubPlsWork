@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public string jump = "Jump_P1";
     public string interactable = "Interact_P1";
     public string throwing = "Throwing_P1";
-    public string interact2 = "Interact2_P1";
+    public string interact2 = "Action_P1";
     string[] scriptID;
     bool _interactableNearby = false;
    // public GameObject bullet;
@@ -81,8 +81,7 @@ public class PlayerController : MonoBehaviour
         //look direction
         if (_horizontalMovement != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(_horizontalMovement);
-            transform.rotation = Quaternion.Slerp(transformold, transform.rotation, Time.deltaTime * speed * 10);
+            transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(_horizontalMovement), 0.2f);
         }
 
         //final movement
