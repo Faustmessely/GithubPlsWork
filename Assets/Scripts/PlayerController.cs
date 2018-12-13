@@ -80,16 +80,13 @@ public class PlayerController : MonoBehaviour
 
 
         //look direction
-        if (_horizontalMovement != Vector3.zero && _horizontalMovement.sqrMagnitude > 0.1f)
+        if (_horizontalMovement != Vector3.zero && _horizontalMovement.sqrMagnitude > 0f)
         {
-
-      
-             transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(  _horizontalMovement), 0.2f);
-       
-
+             transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(_horizontalMovement), 0.2f);
+        }
         //final movement
         controller.Move(moveDirection);
-        }
+    
         transformold = transform.rotation;
     }
 
