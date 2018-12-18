@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
                 // Debug.Log("Object wordt losgelaten");
                 InGebruik = false;
                 GetComponent<Rigidbody>().isKinematic = false;
-                this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.fwd * 0.1f);
+                this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.fwd * 2f);
                 this.transform.parent = null;//parent weg zonder detach   
                 _currentPlayerCtrl.objectOpgenomen = false;
             }
@@ -57,9 +57,9 @@ public class Bullet : MonoBehaviour
                 InGebruik = false;
                 GetComponent<Rigidbody>().isKinematic = false;
                 _currentPlayerTransform.parent = null;//parent weg zonder detach
-                _bulletRigidbody.AddForce(_currentPlayerCtrl.fwd * 10f, ForceMode.Impulse);
+                _bulletRigidbody.AddForce(_currentPlayerCtrl.fwd * 100f, ForceMode.Impulse);
                 _currentPlayerCtrl.objectOpgenomen = false;
-                Invoke("DestroyBullet", 1);
+                Invoke("DestroyBullet", 3);
             }         
         }
 
@@ -68,10 +68,11 @@ public class Bullet : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-        void Parent(GameObject parentOb, GameObject childOb)
-        {
-        childOb.transform.parent = parentOb.transform;
-        }
+
+    void Parent(GameObject parentOb, GameObject childOb)
+    {
+    childOb.transform.parent = parentOb.transform;
+    }
 
    
 }

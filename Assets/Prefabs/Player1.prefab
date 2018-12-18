@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4173210782853022}
   - component: {fileID: 33894999467553610}
   - component: {fileID: 23052933958807284}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4292557886417064}
   - component: {fileID: 33432248572417874}
   - component: {fileID: 23121663563606918}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4595260116658786}
   - component: {fileID: 33602244750273002}
   - component: {fileID: 23436035094363608}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Line001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +73,9 @@ GameObject:
   - component: {fileID: 23124023910538870}
   - component: {fileID: 114389902674706984}
   - component: {fileID: 143450108061577990}
-  - component: {fileID: 65809980978645580}
-  m_Layer: 9
+  - component: {fileID: 64555611080678534}
+  - component: {fileID: 33474077268049750}
+  m_Layer: 2
   m_Name: Player1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -88,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106694883686494}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0038904296, y: 0.11993402, z: -0.04025098}
+  m_LocalPosition: {x: -0.0038904296, y: -0.3500023, z: 0}
   m_LocalScale: {x: 1.1547999, y: 1.1547999, z: 1.1547999}
   m_Children: []
   m_Father: {fileID: 4866457280271704}
@@ -101,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278347294917686}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0036924782, y: 0.057354897, z: -0.05008091}
+  m_LocalPosition: {x: -0.0036924782, y: -2.3500023, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4866457280271704}
@@ -114,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425686036321740}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0004905319, y: 0.19209827, z: -0.06280173}
+  m_LocalPosition: {x: -0.0004905319, y: 3.05, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4866457280271704}
@@ -127,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1605755927951816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4, z: 0}
+  m_LocalPosition: {x: 0, y: 58.8, z: -1.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4595260116658786}
@@ -282,6 +283,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1278347294917686}
   m_Mesh: {fileID: 4300002, guid: b842ebdcece517148ba8efbf0dd8bef7, type: 3}
+--- !u!33 &33474077268049750
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1605755927951816}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33602244750273002
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -296,18 +304,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106694883686494}
   m_Mesh: {fileID: 4300004, guid: b842ebdcece517148ba8efbf0dd8bef7, type: 3}
---- !u!65 &65809980978645580
-BoxCollider:
+--- !u!64 &64555611080678534
+MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1605755927951816}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.215, z: 0.3}
-  m_Center: {x: 0, y: 0.135, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 4173cf068e8794e40902bdd7c5e9bcea, type: 3}
 --- !u!114 &114389902674706984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,9 +329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a783fa69151494c9313773c3f7776a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpSpeed: 0.25
-  gravity: 1
+  speed: 60
+  jumpSpeed: 3
+  gravity: 9
   objectOpgenomen: 0
   fwd: {x: 0, y: 0, z: 0}
   horizontal: Horizontal_P1
@@ -329,6 +339,7 @@ MonoBehaviour:
   jump: Jump_P1
   interactable: Interact_P1
   throwing: Throwing_P1
+  interact2: Action_P1
 --- !u!143 &143450108061577990
 CharacterController:
   m_ObjectHideFlags: 1
@@ -339,10 +350,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.25
-  m_Radius: 0.15
+  m_Height: 8.88
+  m_Radius: 1.53
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_StepOffset: 0.2
+  m_SkinWidth: 0.02
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0.27, z: 0.48}

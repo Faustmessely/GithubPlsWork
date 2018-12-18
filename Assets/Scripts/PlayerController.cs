@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 _verticalMovement = Vector3.zero;
     Outline _targetOutline = new Outline();
     public bool objectOpgenomen = false;
-    GameObject _targetObject = null;
+    GameObject _targetObject;
     bool _hit = false;
     public Vector3 fwd = Vector3.zero;
     RaycastHit _hitInfo;
@@ -25,28 +25,34 @@ public class PlayerController : MonoBehaviour
     public string interactable = "Interact_P1";
     public string throwing = "Throwing_P1";
     public string interact2 = "Action_P1";
-    string[] scriptID;
     bool _interactableNearby = false;
-   // public GameObject bullet;
+    List<Collider> _currentInteractableColliderList;
+    Vector3 _smallestInteractableDistance = Vector3.zero;
+    // public GameObject bullet;
     Vector3 oudePos;
-    bool currentTargetObjectInGebruik;
+    int _playerMask;
+    GameObject _previousTargetObject = null;
+    bool _currentTargetObjectInGebruik = false;
+    bool _targetChange = false;
+
     private void Start()
     {
         controller = this.GetComponent<CharacterController>();
-        //Maak array aan met alle mogelijke interactable scripts;
-        scriptID = new string[] {"Bullet", "Cannon"};
-     //   oudePos = bullet.transform.position;
-
+        //   oudePos = bullet.transform.position;
+        _currentInteractableColliderList = new List<Collider>();
+        //_playerMask = ~(1 << 10);//Geen raycast op de player layer(9)
+        _targetObject = null;
     }
 
 
     private void Update()
     {
-      
+        SearchForTargetObject();
+        InteractableBehavior(_targetObject);
 
         //if (Input.GetButtonDown(interactable))
         //{
-           
+
         //    GameObject newBullet = Instantiate(bullet, oudePos, Quaternion.identity);
         //    newBullet.name = bullet.name;
 
@@ -57,8 +63,8 @@ public class PlayerController : MonoBehaviour
     private void Movement()
     {
         //horizontal movement
-        
-            _horizontalMovement = new Vector3(Input.GetAxis(horizontal), 0f, Input.GetAxis(vertical));
+
+        _horizontalMovement = new Vector3(Input.GetAxis(horizontal), 0f, Input.GetAxis(vertical));
         if (_horizontalMovement.magnitude > 1f) { _horizontalMovement.Normalize(); }
         _horizontalMovement *= (speed * Time.deltaTime);
         //vertical movement(grav)
@@ -82,108 +88,156 @@ public class PlayerController : MonoBehaviour
         //look direction
         if (_horizontalMovement != Vector3.zero && _horizontalMovement.sqrMagnitude > 0f)
         {
-             transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(_horizontalMovement), 0.2f);
+            transform.rotation = Quaternion.Slerp(transformold, Quaternion.LookRotation(_horizontalMovement), 0.2f);
         }
         //final movement
         controller.Move(moveDirection);
-    
+
         transformold = transform.rotation;
     }
 
 
-    private void Interactables()
+    private void SearchForTargetObject()
     {
-
-        ////Check voor interactables       
+        //Raycast settings    
         _hitInfo = new RaycastHit();
         fwd = transform.TransformDirection(Vector3.forward);
-        // Bit shift the index of the layer (8) to get a bit mask
-        int _layerMask = 1 << 10;
-        //inverse bitmask layer
-        //_layerMask = ~_layerMask;!handig
-        _hit = Physics.Raycast(transform.position, fwd, out _hitInfo, 2f, _layerMask);
-        Debug.DrawRay(transform.position, transform.forward, Color.green);
-        if (_hitInfo.collider)//Als de raycast iets hit & _targetobject verwijst nog niet naar het object
+        _hit = Physics.Raycast(transform.position, fwd, out _hitInfo, 1000f);
+        // Debug.DrawRay(transform.position, transform.forward, Color.red);
+
+        //Zoek mogelijke targets om op te nemen
+        if (_hitInfo.collider == false && _targetObject == null && _currentInteractableColliderList.Count > 0)//Selecteer dichtste object als er nog geen object is
         {
-            Debug.Log("werkt");
-            if (_targetObject == null)
+            Debug.Log("1ste Target");
+            foreach (Collider _colliderInteractable in _currentInteractableColliderList)
             {
-                _targetObject = _hitInfo.transform.gameObject;
-                if (_targetObject.transform.tag == "Interactable")//check of het opgeslagen object interactable is
+                Vector3 interactableDistance = _colliderInteractable.transform.position - this.transform.position;
+
+                if (_smallestInteractableDistance == Vector3.zero)
                 {
-                  //  Debug.Log("hit2" + _targetObject.name);
-                    //Als code al enabled is dan is het item al in gebruik door andere speler
-                    MonoBehaviour[] scripts = _targetObject.GetComponents<MonoBehaviour>();
+                    _smallestInteractableDistance = interactableDistance;
+                }
 
-                    foreach (MonoBehaviour script in scripts)
-                    {
-                        //een array van strings en loopen door de array
-                        for (int i = 0; i < scriptID.Length - 1; i++)
-                        {
-                            if (script == _targetObject.GetComponent(scriptID[0]))
-                            {
-                                if (_targetObject.GetComponent<Bullet>().InGebruik == false)
-                                {
-                                    _targetObject.GetComponent<Bullet>().currentPlayer = this.transform.gameObject;//DIT WERKT         
-                                }
-                                else
-                                {
-                                    currentTargetObjectInGebruik = true;
-                                }
-                            }
-                            else if (script == _targetObject.GetComponent(scriptID[1]))
-                            {
-                                _targetObject.GetComponent<Cannon>().currentPlayer = this.transform.gameObject;//DIT WERKT            
-                            }
-
-                        }
-                        script.enabled = true;
-                        //outline effect ON
-                        _targetOutline = _targetObject.GetComponent<Outline>();
-                        _targetOutline.OutlineWidth = 10f;
-                    }
+                if (interactableDistance.magnitude <= _smallestInteractableDistance.magnitude)
+                {
+                    _smallestInteractableDistance = interactableDistance;
+                    _targetObject = _colliderInteractable.transform.gameObject;
                 }
             }
-        }       
-        else if (_hit == false && _targetObject != null && objectOpgenomen == false && currentTargetObjectInGebruik == false)//delete object verwijzing want er wordt niet meer naar gekeken
-        {            
-            MonoBehaviour[] scripts = _targetObject.GetComponents<MonoBehaviour>();
-            Outline _targetObjectOutline = _targetObject.GetComponent<Outline>();
-            //DESACTIVEER CODE VAN INTERACTABLE
-            foreach (MonoBehaviour script in scripts)
-            {
-                if (script != _targetObjectOutline)
-                {
-                    script.enabled = false;
-                }                
-            }
-            //zet object op null nadat script uit zijn gezet
-            _targetObject = null;
 
-            //outline effect OFF
-            _targetOutline.OutlineWidth = 0f;
+        }//als ge naar niks kijkt maar er is wel een object in de
+        else if (_hitInfo.collider && _currentInteractableColliderList.Count > 0)//Verschuif selectie of maak selectie als er nog geen is
+        {
+            if (_hitInfo.transform.gameObject != _targetObject)
+            {
+                Debug.Log("Target Change");
+                _targetObject = _hitInfo.transform.gameObject;
+            }
+        }
+        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false && _currentTargetObjectInGebruik == false)
+        {
+            Debug.Log("ik kijk naar niks dus reset reset");
+            Debug.Log(_currentInteractableColliderList.Count);
+            //Zet alleen op null als er echt niks geselecteerd is
+            _targetObject = null;//TargetObject OFF
+            _smallestInteractableDistance = Vector3.zero;
+        }
+
+     
+        
+    }
+
+    private void InteractableBehavior(GameObject TargetObject)
+    {
+        //Current Target Changed
+        if (_targetObject != _previousTargetObject)
+        {
+            _targetChange = true;
+        }
+        else
+        {
+            _targetChange = false;
+        }
+
+
+        
+        if (_targetChange)
+        {
+          
+            if (_currentTargetObjectInGebruik == false && _previousTargetObject != null)
+            {
+                //Outline OFF //zet ouline uit van vorige target
+                _targetOutline = _previousTargetObject.GetComponent<Outline>();
+                _targetOutline.OutlineWidth = 0;
+
+                //if (_previousTargetObject.GetComponent<Bullet>() != null)//Als het script bestaat
+                //{
+                //    if (_previousTargetObject.GetComponent<Bullet>().InGebruik == false)//Als het object nog niet in gebruik is
+                //    {
+                //        _previousTargetObject.GetComponent<Bullet>().enabled = false;
+                //        _previousTargetObject.GetComponent<Bullet>().currentPlayer = null;
+                //    }
+                //}
+            }
+
+            if (TargetObject != null)
+            {
+                //Outline ON
+                _targetOutline = TargetObject.GetComponent<Outline>();
+                _targetOutline.OutlineWidth = 10;
+
+                //if (TargetObject.GetComponent<Bullet>() != null)//Als het script bestaat
+                //{
+                //    if (_targetObject.GetComponent<Bullet>().currentPlayer == null)//Als het object nog niet in gebruik is
+                //    {
+                //        _currentTargetObjectInGebruik = false;
+                //        TargetObject.GetComponent<Bullet>().enabled = true;
+                //        _targetObject.GetComponent<Bullet>().currentPlayer = this.transform.gameObject;
+                //    }
+                //    else
+                //    {
+                //        _currentTargetObjectInGebruik = true;
+                //    }
+                //}
+            }
+            _previousTargetObject = TargetObject;
         }
     }
+  
 
     private void FixedUpdate()
     {
         Movement();
-        Interactables();
+        
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    _interactableNearby = true;
-    //    if(_targetObject == null)
-    //    {
-    //        _targetObject = other.transform.gameObject;
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
+        if (other.tag == "Interactable")
+        {
+            _currentInteractableColliderList.Add(other);          
+        }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    _interactableNearby = false;
-    //}
+
+        //check op empty list
+        //maak list empty als er geen target meer is
+        //als er geen collision meer is of raycasthit 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
+        if (other.tag == "Interactable")
+        {
+            _currentInteractableColliderList.Remove(other);
+        }
+
+
+        //check op empty list
+        //maak list empty als er geen target meer is
+        //als er geen collision meer is of raycasthit 
+    }
 
     //void OnDrawGizmos()
     //{
