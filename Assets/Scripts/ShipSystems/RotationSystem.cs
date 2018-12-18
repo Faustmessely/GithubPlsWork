@@ -9,23 +9,33 @@ public class RotationSystem : MonoBehaviour {
 
     [SerializeField]
     float _rotation;
-
+    [SerializeField]
     float _maxRotation = 50;
+    [SerializeField]
     float _minRotation = -50;
-    float _initialTurnSpeed = 0.1f;
+    [SerializeField]
+    float _initialTurnSpeed = 1f;
+    [SerializeField]
     float _briskTurnSpeed = 5;
+    [SerializeField]
     float _turnSpeed = 0.1f;
     
     public static float Rotation;
 
+    [SerializeField]
     float _returnTimer;
+    [SerializeField]
     float _returnTimerMax = 3;
 
+    [SerializeField]
     float _turnInterval = 5;
-    float _returnInterval = 2;
+    [SerializeField]
+    float _returnInterval = 1;
+    [SerializeField]
     float _briskRotation = 20;
 
     bool _correctionInProgress;
+    [SerializeField]
     float BounceSpeed = 10;
 
     private void Start()

@@ -8,13 +8,35 @@ public class PlateScript : MonoBehaviour {
     [SerializeField]
     UnityEvent _executedEvent;
 
+    bool _execute = false;
 
-    private void OnTriggerStay(Collider other)
+    int _playerCount;
+
+    private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            _executedEvent.Invoke();
+            _playerCount++;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _playerCount--;
+        }
+    }
+
+
+    private void FixedUpdate()
+    {
+       for(int i = 0; i < _playerCount; i++)
+        _executedEvent.Invoke();
+
+        Debug.Log("count " + _playerCount);
+    }
+
+  
 
 }
