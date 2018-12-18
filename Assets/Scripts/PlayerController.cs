@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     Vector3 oudePos;
     int _playerMask;
     GameObject _previousTargetObject = null;
-    bool _currentTargetObjectInGebruik = false;
+    bool _currentTarObjUsedByOtherPlayer = false;
     bool _targetChange = false;
 
     private void Start()
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
                 _targetObject = _hitInfo.transform.gameObject;
             }
         }
-        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false && _currentTargetObjectInGebruik == false)
+        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false && _currentTarObjUsedByOtherPlayer == false)
         {
             Debug.Log("ik kijk naar niks dus reset reset");
             Debug.Log(_currentInteractableColliderList.Count);
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         if (_targetChange)
         {
           
-            if (_currentTargetObjectInGebruik == false && _previousTargetObject != null)
+            if (_currentTarObjUsedByOtherPlayer == false && _previousTargetObject != null)
             {
                 //Outline OFF //zet ouline uit van vorige target
                 _targetOutline = _previousTargetObject.GetComponent<Outline>();
@@ -186,19 +186,19 @@ public class PlayerController : MonoBehaviour
                 _targetOutline = TargetObject.GetComponent<Outline>();
                 _targetOutline.OutlineWidth = 10;
 
-                //if (TargetObject.GetComponent<Bullet>() != null)//Als het script bestaat
-                //{
-                //    if (_targetObject.GetComponent<Bullet>().currentPlayer == null)//Als het object nog niet in gebruik is
-                //    {
-                //        _currentTargetObjectInGebruik = false;
-                //        TargetObject.GetComponent<Bullet>().enabled = true;
-                //        _targetObject.GetComponent<Bullet>().currentPlayer = this.transform.gameObject;
-                //    }
-                //    else
-                //    {
-                //        _currentTargetObjectInGebruik = true;
-                //    }
-                //}
+                if (TargetObject.GetComponent<Bullet>() != null)//Als het script bestaat
+                {
+                    if (_targetObject.GetComponent<Bullet>().currentPlayer == null)//Als het object nog niet in gebruik is
+                    {
+                        _currentTarObjUsedByOtherPlayer = false;
+                        _targetObject.GetComponent<Bullet>().enabled = true;
+                        _targetObject.GetComponent<Bullet>().currentPlayer = this.transform.gameObject;
+                    }
+                    else
+                    {
+                        _currentTarObjUsedByOtherPlayer = true;
+                    }
+                }
             }
             _previousTargetObject = TargetObject;
         }

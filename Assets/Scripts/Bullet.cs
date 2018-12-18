@@ -41,13 +41,14 @@ public class Bullet : MonoBehaviour
                 Parent(currentPlayer, this.transform.gameObject);
                 this.transform.position = new Vector3(0, boundsPlayer.extents.y * _currentPlayerCtrl.transform.localScale.y,0)+ new Vector3(0, boundsBullet.extents.y * this.transform.localScale.y, 0) + _currentPlayerCtrl.transform.position;
                 _currentPlayerCtrl.objectOpgenomen = true;
+
             }
             else if (_currentPlayerCtrl.objectOpgenomen && Input.GetButtonDown(_currentPlayerCtrl.interactable))
             {
                 // Debug.Log("Object wordt losgelaten");
                 InGebruik = false;
                 GetComponent<Rigidbody>().isKinematic = false;
-                this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.fwd * 2f);
+                this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.fwd * 3f);
                 this.transform.parent = null;//parent weg zonder detach   
                 _currentPlayerCtrl.objectOpgenomen = false;
             }
