@@ -5,7 +5,7 @@ using UnityEngine;
 public class TileMotionBehaviour : MonoBehaviour
 {
 
-    public static float MovementSpeed = 532.5f;
+    public static float MovementSpeed;
 
     [SerializeField]
     public bool _allowLast = true;
@@ -15,7 +15,7 @@ public class TileMotionBehaviour : MonoBehaviour
 
     public static void MovementSpeedReset()
     {
-        MovementSpeed = 532.5f;
+        MovementSpeed = 532.5f /1.2f;
     }
 
 
