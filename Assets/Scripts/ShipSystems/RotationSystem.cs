@@ -7,12 +7,10 @@ public class RotationSystem : MonoBehaviour {
     [SerializeField]
     CheckManager _checkManager;
 
-    [SerializeField]
-    float _rotation;
-    [SerializeField]
-    float _maxRotation = 50;
-    [SerializeField]
-    float _minRotation = -50;
+    public float _rotation;
+    public float _maxRotation = 50;
+    public float _minRotation = -50;
+
     [SerializeField]
     float _initialTurnSpeed = 1f;
     [SerializeField]
