@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 0dd751b4750f5a843b0407d7c56d744c
+guid: 3d240c32ddb3816468b452298f6b55b7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: 01 - Default
+    2100000: 03 - Default
+    2100002: 01 - Default
+    2100004: 02 - Default
     2300000: //RootNode
     3300000: //RootNode
     4300000: Sphere001

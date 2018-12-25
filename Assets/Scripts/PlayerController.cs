@@ -5,9 +5,9 @@ using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 3.0f;
-    public float jumpSpeed = 4.0f;
-    public float gravity = 20f;
+    public float speed = 60.0f;
+    public float jumpSpeed = 3.0f;
+    public float gravity = 9f;
     private Vector3 moveDirection = Vector3.zero;
     Vector3 _horizontalMovement = Vector3.zero;
     private CharacterController controller;
@@ -19,12 +19,19 @@ public class PlayerController : MonoBehaviour
     bool _hit = false;
     public Vector3 fwd = Vector3.zero;
     RaycastHit _hitInfo;
-    public string horizontal = "Horizontal_P1";
-    public string vertical = "Vertical_P1";
-    public string jump = "Jump_P1";
-    public string interactable = "Interact_P1";
-    public string throwing = "Throwing_P1";
-    public string interact2 = "Action_P1";
+    public string inpHorizontal = "Horizontal_P1";
+    public string inpVertical = "Vertical_P1";
+    public string inpJump = "Jump_P1";
+    public string inpPickup = "Interact_P1";
+    public string inpThrowing = "Throwing_P1";
+    public string inpAction = "Action_P1";
+    public float horizontal;
+    public float vertical;
+    public bool jump;
+    public bool pickup;
+    public bool throwing;
+    public bool action;
+    public bool isInputActive = true;
     bool _interactableNearby = false;
     List<Collider> _currentInteractableColliderList;
     Vector3 _smallestInteractableDistance = Vector3.zero;
@@ -34,6 +41,8 @@ public class PlayerController : MonoBehaviour
     GameObject _previousTargetObject = null;
     bool _currentTarObjUsedByOtherPlayer = false;
     bool _targetChange = false;
+    Outline _targetObjectOutline;
+    public LayerMask mask;
 
     private void Start()
     {
@@ -42,14 +51,20 @@ public class PlayerController : MonoBehaviour
         _currentInteractableColliderList = new List<Collider>();
         //_playerMask = ~(1 << 10);//Geen raycast op de player layer(9)
         _targetObject = null;
+        //input
     }
 
 
     private void Update()
     {
-        SearchForTargetObject();
-        InteractableBehavior(_targetObject);
+        InputActive(isInputActive);//Checken of er input active is
 
+        if (!objectOpgenomen)
+        {
+            SearchForTargetObject();
+            IsPlayerLookingAtInteractable(_targetObject);
+            GiveThisPlayerToTarget(_targetObject);
+        }
         //if (Input.GetButtonDown(interactable))
         //{
 
@@ -60,17 +75,41 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void InputActive(bool isInputActive)
+    {
+        if (isInputActive)
+        {         
+            horizontal = Input.GetAxis(inpHorizontal);
+            vertical = Input.GetAxis(inpVertical);
+            jump = Input.GetButtonDown(inpJump);
+            pickup = Input.GetButtonDown(inpPickup);
+            throwing = Input.GetButtonDown(inpThrowing);
+            action = Input.GetButtonDown(inpAction);
+            Time.timeScale = 1;
+        }
+        else
+        {          
+            horizontal = 0;
+            vertical = 0;
+            jump = false;
+            pickup = false;
+            throwing = false;
+            action = false;
+            Time.timeScale = 0;
+        }
+    }
+
     private void Movement()
     {
         //horizontal movement
 
-        _horizontalMovement = new Vector3(Input.GetAxis(horizontal), 0f, Input.GetAxis(vertical));
+        _horizontalMovement = new Vector3(horizontal, 0f, vertical);
         if (_horizontalMovement.magnitude > 1f) { _horizontalMovement.Normalize(); }
         _horizontalMovement *= (speed * Time.deltaTime);
         //vertical movement(grav)
         if (controller.isGrounded)
         {
-            if (Input.GetButtonDown(jump))
+            if (jump)
             {
                 _verticalMovement.y = jumpSpeed;
             }
@@ -100,15 +139,14 @@ public class PlayerController : MonoBehaviour
     private void SearchForTargetObject()
     {
         //Raycast settings    
-        _hitInfo = new RaycastHit();
-        fwd = transform.TransformDirection(Vector3.forward);
-        _hit = Physics.Raycast(transform.position, fwd, out _hitInfo, 1000f);
+        _hitInfo = new RaycastHit();       
+        _hit = Physics.Raycast(transform.position, transform.forward, out _hitInfo, 1000f, mask);
         // Debug.DrawRay(transform.position, transform.forward, Color.red);
 
         //Zoek mogelijke targets om op te nemen
         if (_hitInfo.collider == false && _targetObject == null && _currentInteractableColliderList.Count > 0)//Selecteer dichtste object als er nog geen object is
         {
-            Debug.Log("1ste Target");
+    
             foreach (Collider _colliderInteractable in _currentInteractableColliderList)
             {
                 Vector3 interactableDistance = _colliderInteractable.transform.position - this.transform.position;
@@ -128,26 +166,32 @@ public class PlayerController : MonoBehaviour
         }//als ge naar niks kijkt maar er is wel een object in de
         else if (_hitInfo.collider && _currentInteractableColliderList.Count > 0)//Verschuif selectie of maak selectie als er nog geen is
         {
-            if (_hitInfo.transform.gameObject != _targetObject)
+            if(_targetObject == null)
+            {
+                Debug.Log("Eerste target");
+            }
+            else if(_hitInfo.transform.gameObject != _targetObject)
             {
                 Debug.Log("Target Change");
+            }
+
+            if (_hitInfo.transform.gameObject != _targetObject)
+            {
+         
                 _targetObject = _hitInfo.transform.gameObject;
             }
         }
-        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false && _currentTarObjUsedByOtherPlayer == false)
+        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false)
         {
             Debug.Log("ik kijk naar niks dus reset reset");
             Debug.Log(_currentInteractableColliderList.Count);
-            //Zet alleen op null als er echt niks geselecteerd is
             _targetObject = null;//TargetObject OFF
             _smallestInteractableDistance = Vector3.zero;
         }
 
-     
-        
     }
 
-    private void InteractableBehavior(GameObject TargetObject)
+    private void IsPlayerLookingAtInteractable(GameObject TargetObject)
     {
         //Current Target Changed
         if (_targetObject != _previousTargetObject)
@@ -159,51 +203,37 @@ public class PlayerController : MonoBehaviour
             _targetChange = false;
         }
 
-
-        
         if (_targetChange)
         {
-          
-            if (_currentTarObjUsedByOtherPlayer == false && _previousTargetObject != null)
+            if (_previousTargetObject != null)
             {
-                //Outline OFF //zet ouline uit van vorige target
-                _targetOutline = _previousTargetObject.GetComponent<Outline>();
-                _targetOutline.OutlineWidth = 0;
-
-                //if (_previousTargetObject.GetComponent<Bullet>() != null)//Als het script bestaat
-                //{
-                //    if (_previousTargetObject.GetComponent<Bullet>().InGebruik == false)//Als het object nog niet in gebruik is
-                //    {
-                //        _previousTargetObject.GetComponent<Bullet>().enabled = false;
-                //        _previousTargetObject.GetComponent<Bullet>().currentPlayer = null;
-                //    }
-                //}
+                Debug.Log("targetobject--");
+                //Outline OFF //zet outline uit van vorige target
+                _targetObjectOutline.playersLooking--;
             }
 
             if (TargetObject != null)
             {
-                //Outline ON
-                _targetOutline = TargetObject.GetComponent<Outline>();
-                _targetOutline.OutlineWidth = 10;
-
-                if (TargetObject.GetComponent<Bullet>() != null)//Als het script bestaat
-                {
-                    if (_targetObject.GetComponent<Bullet>().currentPlayer == null)//Als het object nog niet in gebruik is
-                    {
-                        _currentTarObjUsedByOtherPlayer = false;
-                        _targetObject.GetComponent<Bullet>().enabled = true;
-                        _targetObject.GetComponent<Bullet>().currentPlayer = this.transform.gameObject;
-                    }
-                    else
-                    {
-                        _currentTarObjUsedByOtherPlayer = true;
-                    }
-                }
-            }
+                Debug.Log("targetobject++");
+                //Outline ON //zet outline aan van current target
+                _targetObjectOutline = TargetObject.GetComponent<Outline>();
+                _targetObjectOutline.playersLooking++;
+            }          
             _previousTargetObject = TargetObject;
         }
     }
-  
+
+    private void GiveThisPlayerToTarget(GameObject TargetObject)
+    {
+        if (TargetObject == null) return;
+
+        if (TargetObject.GetComponent<Bullet>() && pickup)
+        {
+            Bullet TargetObjectScr = TargetObject.GetComponent<Bullet>();
+            TargetObjectScr.currentPlayer = this.gameObject;
+        }
+
+    }
 
     private void FixedUpdate()
     {
@@ -216,7 +246,18 @@ public class PlayerController : MonoBehaviour
         //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
         if (other.tag == "Interactable")
         {
-            _currentInteractableColliderList.Add(other);          
+            if (other.GetComponent<Bullet>() != null)
+            {
+                if (!other.transform.GetComponent<Bullet>().InGebruik)
+                {
+                    _currentInteractableColliderList.Add(other);
+                }
+
+            }
+        
+               
+
+                Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>());
         }
 
 
@@ -231,6 +272,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Interactable")
         {
             _currentInteractableColliderList.Remove(other);
+            Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>(),false);
         }
 
 

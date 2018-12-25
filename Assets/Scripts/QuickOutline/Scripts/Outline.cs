@@ -16,6 +16,8 @@ using UnityEngine;
 public class Outline : MonoBehaviour {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
+  public int playersLooking = 0;
+
   public enum Mode {
     OutlineAll,
     OutlineVisible,
@@ -135,6 +137,7 @@ public class Outline : MonoBehaviour {
 
       UpdateMaterialProperties();
     }
+        OutlineTargetObject();
   }
 
   void OnDisable() {
@@ -274,4 +277,16 @@ public class Outline : MonoBehaviour {
         break;
     }
   }
+
+    void OutlineTargetObject()
+    {
+        if (playersLooking > 0 && OutlineWidth == 0)
+        {
+            OutlineWidth = 10;
+        }
+        else if(playersLooking <= 0 && OutlineWidth == 10)
+        {
+            OutlineWidth = 0;
+        }
+    }
 }

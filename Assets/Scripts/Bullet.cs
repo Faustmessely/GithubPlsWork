@@ -11,7 +11,8 @@ public class Bullet : MonoBehaviour
     Bounds boundsBullet,boundsPlayer;
     float counterDespawn = 0;
     public bool InGebruik = false;
-  
+    public bool isBeingTargetedByPlayer;
+    public int playersLooking = 0;
     // Use this for initialization
     void Start()
     {
@@ -33,7 +34,7 @@ public class Bullet : MonoBehaviour
             Mesh meshPlayer = currentPlayer.GetComponent<MeshFilter>().mesh;
             boundsPlayer = meshPlayer.bounds;
             //VAN WELKE PLAYER MAG IK CONTROLS ONTVANGEN
-            if (_currentPlayerCtrl.objectOpgenomen == false && Input.GetButtonDown(_currentPlayerCtrl.interactable) && InGebruik == false)
+            if (_currentPlayerCtrl.objectOpgenomen == false && InGebruik == false)
             {
                 //  Debug.Log("Object wordt opgenomen");
                 InGebruik = true;
@@ -43,25 +44,27 @@ public class Bullet : MonoBehaviour
                 _currentPlayerCtrl.objectOpgenomen = true;
 
             }
-            else if (_currentPlayerCtrl.objectOpgenomen && Input.GetButtonDown(_currentPlayerCtrl.interactable))
+            else if (_currentPlayerCtrl.objectOpgenomen && _currentPlayerCtrl.pickup)
             {
                 // Debug.Log("Object wordt losgelaten");
                 InGebruik = false;
                 GetComponent<Rigidbody>().isKinematic = false;
-                this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.fwd * 3f);
+                this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.transform.forward * 5f);
                 this.transform.parent = null;//parent weg zonder detach   
                 _currentPlayerCtrl.objectOpgenomen = false;
+                currentPlayer = null;
             }
-            else if (_currentPlayerCtrl.objectOpgenomen && Input.GetButtonDown(_currentPlayerCtrl.throwing))
+            else if (_currentPlayerCtrl.objectOpgenomen && _currentPlayerCtrl.throwing)
             {
                 //  Debug.Log("Object ffkes weggooien");
                 InGebruik = false;
                 GetComponent<Rigidbody>().isKinematic = false;
                 _currentPlayerTransform.parent = null;//parent weg zonder detach
-                _bulletRigidbody.AddForce(_currentPlayerCtrl.fwd * 100f, ForceMode.Impulse);
+                _bulletRigidbody.AddForce(_currentPlayerCtrl.transform.forward * 500f, ForceMode.Impulse);
                 _currentPlayerCtrl.objectOpgenomen = false;
+                currentPlayer = null;
                 Invoke("DestroyBullet", 3);
-            }         
+            }
         }
 
     }
@@ -69,6 +72,8 @@ public class Bullet : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+   
 
     void Parent(GameObject parentOb, GameObject childOb)
     {
