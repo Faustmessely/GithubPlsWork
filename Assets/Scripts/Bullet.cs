@@ -11,7 +11,6 @@ public class Bullet : MonoBehaviour
     Bounds boundsBullet,boundsPlayer;
     float counterDespawn = 0;
     public bool InGebruik = false;
-    public bool isBeingTargetedByPlayer;
     public int playersLooking = 0;
     // Use this for initialization
     void Start()
@@ -26,7 +25,7 @@ public class Bullet : MonoBehaviour
 	void Update ()
     {
        
-
+        //OBJECT OPAKKEN
         if (currentPlayer != null)
         {
             _currentPlayerCtrl = currentPlayer.GetComponent<PlayerController>();
@@ -59,11 +58,11 @@ public class Bullet : MonoBehaviour
                 //  Debug.Log("Object ffkes weggooien");
                 InGebruik = false;
                 GetComponent<Rigidbody>().isKinematic = false;
-                _currentPlayerTransform.parent = null;//parent weg zonder detach
+                this.transform.parent = null;//parent weg zonder detach
                 _bulletRigidbody.AddForce(_currentPlayerCtrl.transform.forward * 500f, ForceMode.Impulse);
                 _currentPlayerCtrl.objectOpgenomen = false;
                 currentPlayer = null;
-                Invoke("DestroyBullet", 3);
+              //  Invoke("DestroyBullet", 3);
             }
         }
 
@@ -72,13 +71,10 @@ public class Bullet : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
    
-
     void Parent(GameObject parentOb, GameObject childOb)
     {
     childOb.transform.parent = parentOb.transform;
     }
 
-   
 }

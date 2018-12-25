@@ -118,6 +118,12 @@ MonoBehaviour:
   gravity: 9
   objectOpgenomen: 0
   fwd: {x: 0, y: 0, z: 0}
+  inpHorizontal: Horizontal_P2
+  inpVertical: Vertical_P2
+  inpJump: Jump_P2
+  inpPickup: Interact_P2
+  inpThrowing: Throwing_P2
+  inpAction: Action_P2
   horizontal: NaN
   vertical: NaN
   jump: 64

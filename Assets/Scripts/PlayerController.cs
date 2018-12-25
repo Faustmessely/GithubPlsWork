@@ -47,11 +47,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = this.GetComponent<CharacterController>();
-        //   oudePos = bullet.transform.position;
         _currentInteractableColliderList = new List<Collider>();
-        //_playerMask = ~(1 << 10);//Geen raycast op de player layer(9)
         _targetObject = null;
-        //input
     }
 
 
@@ -65,14 +62,6 @@ public class PlayerController : MonoBehaviour
             IsPlayerLookingAtInteractable(_targetObject);
             GiveThisPlayerToTarget(_targetObject);
         }
-        //if (Input.GetButtonDown(interactable))
-        //{
-
-        //    GameObject newBullet = Instantiate(bullet, oudePos, Quaternion.identity);
-        //    newBullet.name = bullet.name;
-
-        //}
-
     }
 
     private void InputActive(bool isInputActive)
@@ -141,7 +130,6 @@ public class PlayerController : MonoBehaviour
         //Raycast settings    
         _hitInfo = new RaycastHit();       
         _hit = Physics.Raycast(transform.position, transform.forward, out _hitInfo, 1000f, mask);
-        // Debug.DrawRay(transform.position, transform.forward, Color.red);
 
         //Zoek mogelijke targets om op te nemen
         if (_hitInfo.collider == false && _targetObject == null && _currentInteractableColliderList.Count > 0)//Selecteer dichtste object als er nog geen object is
@@ -162,19 +150,9 @@ public class PlayerController : MonoBehaviour
                     _targetObject = _colliderInteractable.transform.gameObject;
                 }
             }
-
-        }//als ge naar niks kijkt maar er is wel een object in de
+        }
         else if (_hitInfo.collider && _currentInteractableColliderList.Count > 0)//Verschuif selectie of maak selectie als er nog geen is
         {
-            if(_targetObject == null)
-            {
-                Debug.Log("Eerste target");
-            }
-            else if(_hitInfo.transform.gameObject != _targetObject)
-            {
-                Debug.Log("Target Change");
-            }
-
             if (_hitInfo.transform.gameObject != _targetObject)
             {
          
@@ -183,8 +161,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false)
         {
-            Debug.Log("ik kijk naar niks dus reset reset");
-            Debug.Log(_currentInteractableColliderList.Count);
             _targetObject = null;//TargetObject OFF
             _smallestInteractableDistance = Vector3.zero;
         }
@@ -207,14 +183,12 @@ public class PlayerController : MonoBehaviour
         {
             if (_previousTargetObject != null)
             {
-                Debug.Log("targetobject--");
                 //Outline OFF //zet outline uit van vorige target
                 _targetObjectOutline.playersLooking--;
             }
 
             if (TargetObject != null)
             {
-                Debug.Log("targetobject++");
                 //Outline ON //zet outline aan van current target
                 _targetObjectOutline = TargetObject.GetComponent<Outline>();
                 _targetObjectOutline.playersLooking++;
@@ -237,8 +211,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
-        
+        Movement();       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -252,18 +225,9 @@ public class PlayerController : MonoBehaviour
                 {
                     _currentInteractableColliderList.Add(other);
                 }
-
             }
-        
-               
-
                 Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>());
         }
-
-
-        //check op empty list
-        //maak list empty als er geen target meer is
-        //als er geen collision meer is of raycasthit 
     }
 
     private void OnTriggerExit(Collider other)
@@ -274,17 +238,6 @@ public class PlayerController : MonoBehaviour
             _currentInteractableColliderList.Remove(other);
             Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>(),false);
         }
-
-
-        //check op empty list
-        //maak list empty als er geen target meer is
-        //als er geen collision meer is of raycasthit 
     }
 
-    //void OnDrawGizmos()
-    //{
-    //    Handles.Label(transform.position, "x:" + moveDirection.x);
-    //    Handles.Label(transform.position + Vector3.down, "y:" + moveDirection.y);
-    //    Handles.Label(transform.position + Vector3.down * 2, "z:" + moveDirection.z);
-    //}
 }
