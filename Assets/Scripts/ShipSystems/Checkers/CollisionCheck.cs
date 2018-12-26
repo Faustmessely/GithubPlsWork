@@ -7,9 +7,9 @@ public class CollisionCheck : MonoBehaviour {
     public  bool HitWall;
     public bool HitObstacle;
 
-    private void LateUpdate()
+    private void Update()
     {
-        HitObstacle = false;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,6 +19,7 @@ public class CollisionCheck : MonoBehaviour {
         if (other.gameObject.CompareTag("Obstacle"))
         {
             HitObstacle = true;
+            Debug.Log("Check" + HitObstacle);
             Destroy(other.gameObject);
         }
     }
@@ -28,5 +29,6 @@ public class CollisionCheck : MonoBehaviour {
         if (other.gameObject.CompareTag("Wall"))
             HitWall = false;
     }
+    
     
 }

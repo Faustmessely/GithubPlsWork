@@ -34,7 +34,7 @@ public class PlateScript : MonoBehaviour {
        for(int i = 0; i < _playerCount; i++)
         _executedEvent.Invoke();
 
-        Debug.Log("count " + _playerCount);
+        //Debug.Log("count " + _playerCount);
     }
 
   

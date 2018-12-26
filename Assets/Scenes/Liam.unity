@@ -377,7 +377,7 @@ Transform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114553146598852970, guid: b2fdb75822778fb46b979c8e656ddeed,
     type: 2}
-  m_PrefabInternal: {fileID: 2037757446}
+  m_PrefabInternal: {fileID: 1892226398}
   m_Script: {fileID: 11500000, guid: 6a68bf80d0913b8448f8776082103403, type: 3}
 --- !u!1 &987910253
 GameObject:
@@ -738,7 +738,7 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1653230748}
   m_CullTransparentMesh: 0
---- !u!1001 &2037757446
+--- !u!1001 &1892226398
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -777,16 +777,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 65709724480160952, guid: b2fdb75822778fb46b979c8e656ddeed,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 33339227615256970, guid: b2fdb75822778fb46b979c8e656ddeed,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300022, guid: 94643635d5833294a84d73b6b0d2248c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2fdb75822778fb46b979c8e656ddeed, type: 2}
   m_IsPrefabAsset: 0

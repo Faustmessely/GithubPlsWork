@@ -29,8 +29,8 @@ public class CheckManager : MonoBehaviour {
         AllowRightTentacle = RightChecker.Space;
         ScrollForwardCheckers();
         ShipWallCollision = Ship.HitWall;
-        ShipObstacleCollision = Ship.HitObstacle;
 
+        ShipObstacleCollision = Ship.HitObstacle;
         //Debug.Log("Wall " + ShipWallCollision);
     }
 

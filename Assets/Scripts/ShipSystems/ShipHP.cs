@@ -30,6 +30,7 @@ public class ShipHP : MonoBehaviour {
     void HitObstacle()
     {
         ShipHitPoints -= _obstacleDamage;
+        Debug.Log("Hit");
     }
 
     void Lose()
