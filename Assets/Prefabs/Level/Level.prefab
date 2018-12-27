@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 64613619259118130}
   - component: {fileID: 65979981129117104}
   - component: {fileID: 65529201621860312}
-  - component: {fileID: 114784017078035706}
   - component: {fileID: 54938176611673616}
   m_Layer: 0
   m_Name: Ship
@@ -4127,7 +4126,7 @@ Animator:
   m_GameObject: {fileID: 1953206903010664}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: caf819bf3438967429921959d5e70ca2, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 158f897b0c0513840b25779fc45a460a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4386,19 +4385,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allowLast: 0
---- !u!114 &114784017078035706
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1027997975007512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e286bcc325f77bc42bbb5df9b80391e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitWall: 0
-  HitObstacle: 0
 --- !u!114 &114813088030360848
 MonoBehaviour:
   m_ObjectHideFlags: 1

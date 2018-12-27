@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: caf819bf3438967429921959d5e70ca2
+guid: b001f7fcb6fb5c542b5d6cb7b7436976
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -20,7 +20,7 @@ ModelImporter:
     3300000: Steering Wheel
     4300000: Boat
     4300002: Steering Wheel
-    7400000: Take 002
+    7400000: Take 001
     9500000: //RootNode
     13700000: Boat
   externalObjects: {}
@@ -52,10 +52,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 002
+      name: Take 001
       takeName: Take 001
-      firstFrame: 30
-      lastFrame: 50
+      firstFrame: 0
+      lastFrame: 18
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
