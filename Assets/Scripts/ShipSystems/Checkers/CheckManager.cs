@@ -30,7 +30,11 @@ public class CheckManager : MonoBehaviour {
         ScrollForwardCheckers();
         ShipWallCollision = Ship.HitWall;
 
-        ShipObstacleCollision = Ship.HitObstacle;
+       ShipObstacleCollision = Ship.HitObstacle;
+        if(Ship.HitObstacle)
+        {
+            Ship.ObstacleReset();
+        }
         //Debug.Log("Wall " + ShipWallCollision);
     }
 

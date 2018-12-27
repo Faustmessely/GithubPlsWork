@@ -15,19 +15,19 @@ public class ShipHP : MonoBehaviour {
     private void Update()
     {
         if (_checkManager.ShipObstacleCollision)
-            HitObstacle();
+            DoHitObstacle();
         if (_checkManager.ShipWallCollision)
-            HitWall();
+            DoHitWall();
         if (ShipHitPoints < 0)
             Lose();
     }
 
-    void HitWall()
+    void DoHitWall()
     {
         ShipHitPoints -= _wallDamage;
     }
 
-    void HitObstacle()
+    void DoHitObstacle()
     {
         ShipHitPoints -= _obstacleDamage;
         Debug.Log("Hit");
