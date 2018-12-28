@@ -4,29 +4,60 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
-    bool _activated = false;
+    public bool activated;
     float _timer = 0;
     public int spawnTime = 10;
-	// Use this for initialization
-	void Start () {
-		
-	}
+    Animation animHook;
+    public GameObject prefBullet;
+    bool hookDown = false;
+    GameObject objectHooked;
+    int _previousHookChildCount;
+    // Use this for initialization
+    Transform _hook;
+    void Start ()
+    {
+        animHook = this.GetComponent<Animation>();
+        _hook = this.transform.Find("Bone001");
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (_activated)//activeer bool op input
+
+        if (_previousHookChildCount != _hook.childCount)//Als je het geviste object van de haak haalt
         {
-            _timer += Time.deltaTime;
+            animHook.Play("HookNoWeight");
+
         }
 
-        if(_timer >= spawnTime)
+        if (activated)//activeer bool op input
+        {          
+
+            if (transform.childCount <= 3)//Als er geen children zijn en dus niks is opgevist
+            {
+                if(!hookDown)
+                {
+                    animHook.Play("HookDown");
+                    hookDown = true;
+                }
+                _timer += Time.deltaTime;
+                
+            }
+        }
+
+        if(_timer >= spawnTime)//als de timer langer dan spawntijd onder water is dan vist de haak iets
         {
-            //speel animatie
-            //add item 2 array
+            hookDown = false;
+            objectHooked = Instantiate(prefBullet, _hook.position, Quaternion.identity);
+            objectHooked.transform.SetParent(_hook);
+            Bullet ObjectHookedScr = objectHooked.GetComponent<Bullet>();
+            ObjectHookedScr.GetComponent<Rigidbody>().isKinematic = true;
+            animHook.Play("HookUp");
             _timer = 0;//resettimer
-            _activated = false;
+            activated = false;
+           
         }
 
-	}
+        _previousHookChildCount = _hook.childCount;
+    }
 }
