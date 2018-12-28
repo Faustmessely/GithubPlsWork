@@ -58,13 +58,7 @@ public class Cannon : MonoBehaviour {
         if (collision.gameObject.tag == "Interactable")
         {
 
-
-            if (_currentStock >= maxStock)
-            {
-                Debug.Log("destroy object");
-                Destroy(collision.gameObject);
-            }
-            else
+            if(_currentStock < maxStock)
             {
 
                 _currentStock += 1;// of add aan een list of array  
@@ -74,6 +68,12 @@ public class Cannon : MonoBehaviour {
                 collision.transform.GetComponent<Rigidbody>().isKinematic = true;
                 collision.transform.position = this.gameObject.transform.GetChild(0).position;
                 _bullets.Add(collision.gameObject);        //voeg toe aan array van kogels voor dit kanon    collision.transform.position = ;
+            }
+            else
+            {
+                Debug.Log("destroy object");
+                Destroy(collision.gameObject);
+
             }
         }
     }
