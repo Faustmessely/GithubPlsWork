@@ -13,12 +13,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     Quaternion transformold;
     Vector3 _verticalMovement = Vector3.zero;
-    Outline _targetOutline = new Outline();
-    public bool objectOpgenomen = false;
-    GameObject _targetObject;
-    bool _hit = false;
-    public Vector3 fwd = Vector3.zero;
-    RaycastHit _hitInfo;
+
+
     public string inpHorizontal = "Horizontal_P1";
     public string inpVertical = "Vertical_P1";
     public string inpJump = "Jump_P1";
@@ -33,35 +29,18 @@ public class PlayerController : MonoBehaviour
     public bool action;
     public bool isInputActive = true;
     bool _interactableNearby = false;
-    List<Collider> _currentInteractableColliderList;
-    Vector3 _smallestInteractableDistance = Vector3.zero;
-    // public GameObject bullet;
-    Vector3 oudePos;
-    int _playerMask;
-    GameObject _previousTargetObject = null;
-    bool _currentTarObjUsedByOtherPlayer = false;
-    bool _targetChange = false;
-    Outline _targetObjectOutline;
-    public LayerMask mask;
+    public bool objectOpgenomen = false;
 
     private void Start()
     {
         controller = this.GetComponent<CharacterController>();
-        _currentInteractableColliderList = new List<Collider>();
-        _targetObject = null;
+
     }
 
 
     private void Update()
     {
         InputActive(isInputActive);//Checken of er input active is
-
-        if (!objectOpgenomen)
-        {
-            SearchForTargetObject();
-            IsPlayerLookingAtInteractable(_targetObject);
-            GiveThisPlayerToTarget(_targetObject);
-        }
     }
 
     private void InputActive(bool isInputActive)
@@ -125,119 +104,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void SearchForTargetObject()
-    {
-        //Raycast settings    
-        _hitInfo = new RaycastHit();       
-        _hit = Physics.Raycast(transform.position, transform.forward, out _hitInfo, 1000f, mask);
-
-        //Zoek mogelijke targets om op te nemen
-        if (_hitInfo.collider == false && _targetObject == null && _currentInteractableColliderList.Count > 0)//Selecteer dichtste object als er nog geen object is
-        {
-    
-            foreach (Collider _colliderInteractable in _currentInteractableColliderList)
-            {
-                Vector3 interactableDistance = _colliderInteractable.transform.position - this.transform.position;
-
-                if (_smallestInteractableDistance == Vector3.zero)
-                {
-                    _smallestInteractableDistance = interactableDistance;
-                }
-
-                if (interactableDistance.magnitude <= _smallestInteractableDistance.magnitude)
-                {
-                    _smallestInteractableDistance = interactableDistance;
-                    _targetObject = _colliderInteractable.transform.gameObject;
-                }
-            }
-        }
-        else if (_hitInfo.collider && _currentInteractableColliderList.Count > 0)//Verschuif selectie of maak selectie als er nog geen is
-        {
-            if (_hitInfo.transform.gameObject != _targetObject)
-            {
-         
-                _targetObject = _hitInfo.transform.gameObject;
-            }
-        }
-        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && objectOpgenomen == false)
-        {
-            _targetObject = null;//TargetObject OFF
-            _smallestInteractableDistance = Vector3.zero;
-        }
-
-    }
-
-    private void IsPlayerLookingAtInteractable(GameObject TargetObject)
-    {
-        //Current Target Changed
-        if (_targetObject != _previousTargetObject)
-        {
-            _targetChange = true;
-        }
-        else
-        {
-            _targetChange = false;
-        }
-
-        if (_targetChange)
-        {
-            if (_previousTargetObject != null)
-            {
-                //Outline OFF //zet outline uit van vorige target
-                _targetObjectOutline.playersLooking--;
-            }
-
-            if (TargetObject != null)
-            {
-                //Outline ON //zet outline aan van current target
-                _targetObjectOutline = TargetObject.GetComponent<Outline>();
-                _targetObjectOutline.playersLooking++;
-            }          
-            _previousTargetObject = TargetObject;
-        }
-    }
-
-    private void GiveThisPlayerToTarget(GameObject TargetObject)
-    {
-        if (TargetObject == null) return;
-
-        if (TargetObject.GetComponent<Bullet>() && pickup)
-        {
-            Bullet TargetObjectScr = TargetObject.GetComponent<Bullet>();
-            TargetObjectScr.currentPlayer = this.gameObject;
-        }
-
-    }
-
     private void FixedUpdate()
     {
         Movement();       
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
-        if (other.tag == "Interactable")
-        {
-            if (other.GetComponent<Bullet>() != null)
-            {
-                if (!other.transform.GetComponent<Bullet>().InGebruik)
-                {
-                    _currentInteractableColliderList.Add(other);
-                }
-            }
-                Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>());
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
-        if (other.tag == "Interactable")
-        {
-            _currentInteractableColliderList.Remove(other);
-            Physics.IgnoreCollision(other.GetComponent<Collider>(), this.GetComponent<Collider>(),false);
-        }
     }
 
 }

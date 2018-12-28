@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - Wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - PostProcessing
   - Players
   - Interactables
-  - 
+  - Collider
   - 
   - 
   - 
