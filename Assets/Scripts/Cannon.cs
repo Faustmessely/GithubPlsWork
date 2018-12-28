@@ -12,10 +12,12 @@ public class Cannon : MonoBehaviour {
     bool _cannonLoaded;
     public List<GameObject> _bullets = new List<GameObject>();
     public bool activated;
+    Animation animCannon;
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        animCannon = this.GetComponent<Animation>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,10 +31,11 @@ public class Cannon : MonoBehaviour {
         if (CannonLoaded && activated)
         {
             Debug.Log("SHOOOOOT");
+            animCannon.Play("CannonShoot");
             foreach (GameObject _bullet in _bullets)
             {
                 _bullet.GetComponent<Rigidbody>().isKinematic = false;
-                _bullet.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 500f, ForceMode.Impulse);               
+                _bullet.GetComponent<Rigidbody>().AddForce(this.transform.Find("Barrel").forward * 500f, ForceMode.Impulse);               
             }
             _bullets.Clear();
             activated = false;

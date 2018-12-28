@@ -124,6 +124,7 @@ public class ObjectSeeker : MonoBehaviour {
 
         if(TargetObject.GetComponent<Cannon>() && _player.action)
         {
+            Debug.Log("Activeer object");
             Cannon TargetObjectScr = TargetObject.GetComponent<Cannon>();
             TargetObjectScr.activated = true;
         }
