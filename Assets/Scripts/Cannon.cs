@@ -30,7 +30,7 @@ public class Cannon : MonoBehaviour {
     {
         if (CannonLoaded && activated)
         {
-            Debug.Log("SHOOOOOT");
+
             animCannon.Play("CannonShoot");
             foreach (GameObject _bullet in _bullets)
             {
@@ -65,7 +65,7 @@ public class Cannon : MonoBehaviour {
             {
 
                 _currentStock += 1;// of add aan een list of array  
-                Debug.Log(_currentStock + "/" + maxStock);
+
 
                 Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.gameObject.transform.GetChild(0).GetComponent<Collider>(), true);
                 collision.transform.GetComponent<Rigidbody>().isKinematic = true;
