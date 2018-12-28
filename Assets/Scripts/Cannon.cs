@@ -11,6 +11,7 @@ public class Cannon : MonoBehaviour {
     public GameObject currentPlayer;
     bool _cannonLoaded;
     public List<GameObject> _bullets = new List<GameObject>();
+    public bool activated;
     // Use this for initialization
     void Start () {
 		
@@ -20,21 +21,25 @@ public class Cannon : MonoBehaviour {
     void Update()
     {
         _cannonLoaded = LoadingCannon();
-        //ShootingCannon(_cannonLoaded);
+        ShootingCannon(_cannonLoaded);
     }
 
-    //private void ShootingCannon(bool CannonLoaded)
-    //{
-    //    if (CannonLoaded && //druk op schiet knop)
-    //    {
-    //        foreach (GameObject _bullet in _bullets)
-    //        {
-    //            //zet positie naar barrel child positie
-    //            //zet een force tot de array op is
-    //        }
-    //        _currentStock = 0;
-    //    }
-    //}
+    private void ShootingCannon(bool CannonLoaded)
+    {
+        if (CannonLoaded && activated)
+        {
+            Debug.Log("SHOOOOOT");
+            foreach (GameObject _bullet in _bullets)
+            {
+                _bullet.GetComponent<Rigidbody>().isKinematic = false;
+                _bullet.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 500f, ForceMode.Impulse);
+                //_bullets.Remove(_bullet.gameObject);
+            }
+            activated = false;
+            _currentStock = 0;
+        }
+        activated = false;
+    }
 
     private bool LoadingCannon(bool _fullyLoaded = false)
     {      
@@ -50,9 +55,26 @@ public class Cannon : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("lol");
-        _currentStock += 1;// of add aan een list of array
-        collision.transform.position = this.gameObject.transform.GetChild(0).position ;
-       // _bullets.Add(collision.gameObject);        //voeg toe aan array van kogels voor dit kanon    collision.transform.position = ;
+        if (collision.gameObject.tag == "Interactable")
+        {
+
+
+            if (_currentStock >= maxStock)
+            {
+                Debug.Log("destroy object");
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+
+                _currentStock += 1;// of add aan een list of array  
+                Debug.Log(_currentStock + "/" + maxStock);
+
+                Physics.IgnoreCollision(this.GetComponent<Collider>(), collision.gameObject.transform.GetChild(0).GetComponent<Collider>(), true);
+                collision.transform.GetComponent<Rigidbody>().isKinematic = true;
+                collision.transform.position = this.gameObject.transform.GetChild(0).position;
+                _bullets.Add(collision.gameObject);        //voeg toe aan array van kogels voor dit kanon    collision.transform.position = ;
+            }
+        }
     }
 }

@@ -116,12 +116,17 @@ public class ObjectSeeker : MonoBehaviour {
     {
         if (TargetObject == null) return;
 
-        if (TargetObject.GetComponent<Bullet>() && _player.pickup && !_player.objectOpgenomen)
+        if (TargetObject.GetComponent<Bullet>() && _player.pickup)
         {
             Bullet TargetObjectScr = TargetObject.GetComponent<Bullet>();
             TargetObjectScr.currentPlayer = this.transform.parent.gameObject;
         }
 
+        if(TargetObject.GetComponent<Cannon>() && _player.action)
+        {
+            Cannon TargetObjectScr = TargetObject.GetComponent<Cannon>();
+            TargetObjectScr.activated = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

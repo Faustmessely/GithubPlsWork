@@ -35,13 +35,14 @@ public class Bullet : MonoBehaviour
             if (_currentPlayerCtrl.objectOpgenomen == false && InGebruik == false)
             {
                 //  Debug.Log("Object wordt opgenomen");
+                Physics.IgnoreLayerCollision(9, 12, true);
                 InGebruik = true;
                 GetComponent<Rigidbody>().isKinematic = true;
                 Parent(currentPlayer, this.transform.gameObject);
                 this.transform.position = new Vector3(0, boundsPlayer.extents.y * _currentPlayerCtrl.transform.localScale.y,0)+ new Vector3(0, boundsBullet.extents.y * this.transform.localScale.y, 0) + _currentPlayerCtrl.transform.position;
                 _currentPlayerCtrl.objectOpgenomen = true;
                 //verwijder uit colllider lijst targetobject wordt null
-
+               
             }
             else if (_currentPlayerCtrl.objectOpgenomen && _currentPlayerCtrl.pickup)
             {
@@ -53,6 +54,7 @@ public class Bullet : MonoBehaviour
                 _currentPlayerCtrl.objectOpgenomen = false;
                 currentPlayer = null;
                 _currentPlayerCtrl.pickup = false;
+                Physics.IgnoreLayerCollision(9, 12, false);
             }
             else if (_currentPlayerCtrl.objectOpgenomen && _currentPlayerCtrl.throwing)
             {
@@ -63,7 +65,8 @@ public class Bullet : MonoBehaviour
                 _bulletRigidbody.AddForce(_currentPlayerCtrl.transform.forward * 500f, ForceMode.Impulse);
                 _currentPlayerCtrl.objectOpgenomen = false;
                 currentPlayer = null;
-              //  Invoke("DestroyBullet", 3);
+                Physics.IgnoreLayerCollision(9, 12, false);
+                //  Invoke("DestroyBullet", 3);
             }
         }
 
