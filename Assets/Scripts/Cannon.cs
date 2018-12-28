@@ -32,9 +32,9 @@ public class Cannon : MonoBehaviour {
             foreach (GameObject _bullet in _bullets)
             {
                 _bullet.GetComponent<Rigidbody>().isKinematic = false;
-                _bullet.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 500f, ForceMode.Impulse);
-                //_bullets.Remove(_bullet.gameObject);
+                _bullet.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 500f, ForceMode.Impulse);               
             }
+            _bullets.Clear();
             activated = false;
             _currentStock = 0;
         }
