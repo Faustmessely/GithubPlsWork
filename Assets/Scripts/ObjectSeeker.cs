@@ -32,19 +32,19 @@ public class ObjectSeeker : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (!_player.objectOpgenomen)//if objectisopgenomen true targetobject is != opgenomen object
-        {
+        //if (!_player.objectOpgenomen)//if objectisopgenomen true targetobject is != opgenomen object
+        //{
             SearchForTargetObject();
             IsPlayerLookingAtInteractable(_targetObject);
             GiveThisPlayerToTarget(_targetObject);
-        }
+        //}
     }
 
     private void SearchForTargetObject()
     {
         //Raycast settings    
         _hitInfo = new RaycastHit();
-        _hit = Physics.Raycast(this.transform.parent.position, transform.forward, out _hitInfo, 1000f, mask);
+        _hit = Physics.Raycast(this.transform.parent.position, this.transform.parent.forward, out _hitInfo, 1000f, mask);
 
         //Zoek mogelijke targets om op te nemen
         if (_hitInfo.collider == false && _targetObject == null && _currentInteractableColliderList.Count > 0)//Selecteer dichtste object als er nog geen object is
@@ -74,7 +74,7 @@ public class ObjectSeeker : MonoBehaviour {
                 _targetObject = _hitInfo.transform.gameObject;
             }
         }
-        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null && _player.objectOpgenomen == false)
+        else if (_hit == false && _currentInteractableColliderList.Count <= 0 && _targetObject != null)//&& _player.objectOpgenomen == false
         {
             _targetObject = null;//TargetObject OFF
             _smallestInteractableDistance = Vector3.zero;
@@ -116,7 +116,7 @@ public class ObjectSeeker : MonoBehaviour {
     {
         if (TargetObject == null) return;
 
-        if (TargetObject.GetComponent<Bullet>() && _player.pickup)
+        if (TargetObject.GetComponent<Bullet>() && _player.pickup && !_player.objectOpgenomen)
         {
             Bullet TargetObjectScr = TargetObject.GetComponent<Bullet>();
             TargetObjectScr.currentPlayer = this.transform.parent.gameObject;
@@ -129,13 +129,13 @@ public class ObjectSeeker : MonoBehaviour {
         //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
         if (other.tag == "Interactable")
         {
-            //     if (other.GetComponent<Bullet>() != null)
-            // {
+            //if (other.GetComponent<Bullet>() != null)
+            //{
             //    if (!other.transform.GetComponent<Bullet>().InGebruik)
             //    {
-            _currentInteractableColliderList.Add(other);
+                    _currentInteractableColliderList.Add(other);
             //    }
-            // }
+            //}
         }
     }
 
