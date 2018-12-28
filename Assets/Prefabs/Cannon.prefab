@@ -277,7 +277,7 @@ MonoBehaviour:
   playersLooking: 0
   outlineMode: 0
   outlineColor: {r: 1, g: 0.9812064, b: 0, a: 1}
-  outlineWidth: 10
+  outlineWidth: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
