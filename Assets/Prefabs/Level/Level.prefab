@@ -328,6 +328,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1313203227320792
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4446994384623848}
+  - component: {fileID: 114700032657613274}
+  m_Layer: 0
+  m_Name: Steering Wheel Axis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1352616346598176
 GameObject:
   m_ObjectHideFlags: 1
@@ -824,7 +840,7 @@ GameObject:
   - component: {fileID: 54400625935959998}
   - component: {fileID: 65201363463152328}
   m_Layer: 0
-  m_Name: Stearing (1)
+  m_Name: Steering (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1080,7 @@ GameObject:
   - component: {fileID: 54106620940466024}
   - component: {fileID: 65283926912823636}
   m_Layer: 0
-  m_Name: Stearing
+  m_Name: Steering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1080,6 +1096,7 @@ GameObject:
   - component: {fileID: 4187893002612488}
   - component: {fileID: 95863221054451222}
   - component: {fileID: 54004943592348822}
+  - component: {fileID: 114744698446548120}
   m_Layer: 0
   m_Name: ShipAnimated
   m_TagString: Untagged
@@ -1262,7 +1279,7 @@ Transform:
   m_Children:
   - {fileID: 4824718983583876}
   - {fileID: 4334343585613712}
-  - {fileID: 4530607505065860}
+  - {fileID: 4446994384623848}
   - {fileID: 4403928054875932}
   - {fileID: 4065291914611142}
   m_Father: {fileID: 4662968087960296}
@@ -1547,6 +1564,20 @@ Transform:
   m_Father: {fileID: 4321660232452832}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4446994384623848
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1313203227320792}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.19424999, z: -0.24805}
+  m_LocalScale: {x: 1, y: 2.3675401, z: 2.3675401}
+  m_Children:
+  - {fileID: 4530607505065860}
+  m_Father: {fileID: 4187893002612488}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4456184823009380
 Transform:
   m_ObjectHideFlags: 1
@@ -1677,13 +1708,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764224570067114}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.004689703, y: 0.0709704, z: -0.21894357}
-  m_LocalScale: {x: 1, y: 1, z: 2.3675342}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0051, y: -0.05253, z: 0.03064362}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4187893002612488}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 4446994384623848}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4533564375120346
 Transform:
   m_ObjectHideFlags: 1
@@ -2567,7 +2598,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: caf819bf3438967429921959d5e70ca2, type: 3}
+  - {fileID: 2100000, guid: b320e5ea6180ca6489407258c19a5d40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3575,7 +3606,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!54 &54400625935959998
 Rigidbody:
@@ -3590,7 +3621,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!54 &54584748093373606
 Rigidbody:
@@ -4268,6 +4299,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114744698446548120}
+        m_MethodName: GoLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114700032657613274}
+        m_MethodName: RotateLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114510507699026730
@@ -4373,6 +4426,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Space: 1
+--- !u!114 &114700032657613274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1313203227320792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b7ca87fd8de73458a3a2ebac1b5440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ultimate: 49
+  _incrementForRotation: 30
+  _speed: 100
 --- !u!114 &114738559463803274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4385,6 +4452,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allowLast: 0
+--- !u!114 &114744698446548120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1953206903010664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f09ec67cd0dae4facfcc51863b342e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shipAnimator: {fileID: 95863221054451222}
+  _firedTimerMax: 0.1
 --- !u!114 &114813088030360848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4401,6 +4481,28 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114553146598852970}
         m_MethodName: TurnRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114744698446548120}
+        m_MethodName: GoRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114700032657613274}
+        m_MethodName: RotateRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
