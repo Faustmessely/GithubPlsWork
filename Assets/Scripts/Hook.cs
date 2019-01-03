@@ -30,34 +30,36 @@ public class Hook : MonoBehaviour
 
         }
 
-        if (activated)//activeer bool op input
+        if (activated && _hook.childCount <= 0)//input geactiveert van speler & niks hangt aan de haak
         {          
-
-            if (transform.childCount <= 3)//Als er geen children zijn en dus niks is opgevist
+            if(!hookDown)
             {
-                if(!hookDown)
-                {
-                    animHook.Play("HookDown");
-                    hookDown = true;
-                }
-                _timer += Time.deltaTime;
-                
+                animHook.Play("HookDown");
+                hookDown = true;
             }
+            _timer += Time.deltaTime;
+        }
+        else
+        {
+            activated = false;
         }
 
         if(_timer >= spawnTime)//als de timer langer dan spawntijd onder water is dan vist de haak iets
         {
             hookDown = false;
             objectHooked = Instantiate(prefBullet, _hook.position, Quaternion.identity);
-            objectHooked.transform.SetParent(_hook);
+            objectHooked.transform.SetParent(_hook);//Deze manier zodat de scale wordt behouden
             Bullet ObjectHookedScr = objectHooked.GetComponent<Bullet>();
             ObjectHookedScr.GetComponent<Rigidbody>().isKinematic = true;
             animHook.Play("HookUp");
             _timer = 0;//resettimer
-            activated = false;
-           
         }
 
+        
         _previousHookChildCount = _hook.childCount;
     }
 }
+
+
+
+//als er iets is opgevist maar ge drukt al op visknop dan wordt na de animatie er iets opgevist
