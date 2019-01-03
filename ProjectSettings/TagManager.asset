@@ -7,6 +7,8 @@ TagManager:
   - Interactable
   - Wall
   - Obstacle
+  - CheckManager
+  - Ship
   layers:
   - Default
   - TransparentFX

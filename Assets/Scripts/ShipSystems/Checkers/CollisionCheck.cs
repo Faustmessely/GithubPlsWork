@@ -17,7 +17,7 @@ public class CollisionCheck : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log("Is " + HitObstacle);
+       // Debug.Log("Is " + HitObstacle);
        
     }
 
