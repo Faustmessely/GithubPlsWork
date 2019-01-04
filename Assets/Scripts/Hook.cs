@@ -49,6 +49,7 @@ public class Hook : MonoBehaviour
             hookDown = false;
             objectHooked = Instantiate(prefBullet, _hook.position, Quaternion.identity);
             objectHooked.transform.SetParent(_hook);//Deze manier zodat de scale wordt behouden
+            objectHooked.name = "Bullet";
             Bullet ObjectHookedScr = objectHooked.GetComponent<Bullet>();
             ObjectHookedScr.GetComponent<Rigidbody>().isKinematic = true;
             animHook.Play("HookUp");
