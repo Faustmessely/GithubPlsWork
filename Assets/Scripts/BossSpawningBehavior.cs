@@ -94,3 +94,8 @@ public class BossSpawningBehavior : MonoBehaviour
     //idee elke keer als boss kop onder gaat kies nieuw aantal max levenden mogelijk levenden
 
     //alleen collision als die alive is
+
+
+
+
+    //cannon schiet oneindig door na gooien erop? object verdwijnt voordat het wordt afgeschoten

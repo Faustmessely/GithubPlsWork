@@ -66,7 +66,7 @@ public class Bullet : MonoBehaviour
                 _currentPlayerCtrl.objectOpgenomen = false;
                 currentPlayer = null;
                 Physics.IgnoreLayerCollision(9, 12, false);
-                Invoke("DestroyBullet", 3);
+                //Invoke("DestroyBullet", 3);
             }
         }
 
