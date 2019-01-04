@@ -13,7 +13,7 @@ public class BossSpawningBehavior : MonoBehaviour
     int _tentacleSubmergedCondition = 4;
     public int tentaclesMerged = 0;
     public int maxTentaclesMergedAllowed = 2;
-    public int SquidMaxHeatlh = 1000;
+  
     CheckManager _checkSpawn;
     // Use this for initialization
     void Start ()

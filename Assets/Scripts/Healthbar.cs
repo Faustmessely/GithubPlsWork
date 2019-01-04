@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarScriptSquid : MonoBehaviour
+public class Healthbar : MonoBehaviour
 {
 
     private float _fillAmount;
@@ -16,13 +16,13 @@ public class HealthBarScriptSquid : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _maxHealth = GameObject.GetComponent<BossSpawningBehavior>().SquidMaxHeatlh;
+        _maxHealth = GameObject.GetComponent<Healthpoints>().maxHealth;
     }
-
+    //
     // Update is called once per frame
     void Update()
     {
-        _currentHealth = GameObject.GetComponent<BossSpawningBehavior>().SquidMaxHeatlh;
+        _currentHealth = GameObject.GetComponent<Healthpoints>().maxHealth;
         _fillAmount = translateValue(_currentHealth, 1, _maxHealth);
         HealthBar.fillAmount = _fillAmount;
     }

@@ -12,6 +12,7 @@ public class Tentacle : MonoBehaviour
     int _tentacleHp = 50;
     public bool despawnTentacle = false;
     BossSpawningBehavior _boss;
+    Healthpoints _healthPoints;
     Animation anim;
     ShipHP ship;
     int _aanvalRnd;
@@ -26,7 +27,8 @@ public class Tentacle : MonoBehaviour
     {
        
         _boss = transform.parent.gameObject.GetComponent<BossSpawningBehavior>();
-		if(Merged == false && _spawnProcess == false && _boss.tentaclesMerged < _boss.maxTentaclesMergedAllowed)
+        _healthPoints = transform.parent.gameObject.GetComponent<Healthpoints>();
+        if (Merged == false && _spawnProcess == false && _boss.tentaclesMerged < _boss.maxTentaclesMergedAllowed)
         {
             timer = 0;
             timer = Random.Range(1, 8);
@@ -94,7 +96,7 @@ public class Tentacle : MonoBehaviour
         {
             Debug.Log("dood");
             _tentacleHp -= 50;
-            _boss.SquidMaxHeatlh -= 50;
+            _healthPoints.maxHealth -= 50;
         }
     }
 }
