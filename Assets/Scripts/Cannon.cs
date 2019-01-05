@@ -34,6 +34,8 @@ public class Cannon : MonoBehaviour {
             animCannon.Play("CannonShoot");
             foreach (GameObject _bullet in _bullets)
             {
+                Bullet _bulletScr = _bullet.GetComponent<Bullet>();//Zet bool op true wnr in cannon
+                _bulletScr.cannonPower = true;
                 _bullet.GetComponent<Rigidbody>().isKinematic = false;
                 _bullet.GetComponent<Rigidbody>().AddForce(this.transform.Find("Barrel").forward * 500f, ForceMode.Impulse);               
             }

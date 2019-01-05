@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 0dd751b4750f5a843b0407d7c56d744c
+guid: c2328cdf5e7ccb24c8df49c1970708c1
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: 01 - Default
+    2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sphere001
+    4300000: Object004
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.2
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
