@@ -5,29 +5,55 @@ ModelImporter:
   fileIDToRecycleName:
     100000: Boat
     100002: Bone001
-    100004: Bone002
-    100006: Bone003
-    100008: Bone004
-    100010: Bone005
-    100012: Bone006
-    100014: Bone007
-    100016: //RootNode
+    100004: Bone007
+    100006: Bone008
+    100008: Bone009
+    100010: Bone010
+    100012: Bone011
+    100014: Bone012
+    100016: Object001
+    100018: Object002
+    100020: Object003
+    100022: Object004
+    100024: Object005
+    100026: Object006
+    100028: //RootNode
     400000: Boat
     400002: Bone001
-    400004: Bone002
-    400006: Bone003
-    400008: Bone004
-    400010: Bone005
-    400012: Bone006
-    400014: Bone007
-    400016: //RootNode
+    400004: Bone007
+    400006: Bone008
+    400008: Bone009
+    400010: Bone010
+    400012: Bone011
+    400014: Bone012
+    400016: Object001
+    400018: Object002
+    400020: Object003
+    400022: Object004
+    400024: Object005
+    400026: Object006
+    400028: //RootNode
     2100000: 03 - Default
     2100002: 02 - Default
     4300000: Boat
-    7400000: ShootLeft
-    7400002: ShootRight
+    4300002: Object001
+    4300004: Object002
+    4300006: Object003
+    4300008: Object004
+    4300010: Object005
+    4300012: Object006
+    7400000: Enter
+    7400002: Shoot
+    7400004: Leave
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Boat
+    13700002: Object001
+    13700004: Object002
+    13700006: Object003
+    13700008: Object004
+    13700010: Object005
+    13700012: Object006
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -39,7 +65,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: Boat
+    motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -50,17 +76,17 @@ ModelImporter:
     importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
-    animationPositionError: 0.5
+    animationPositionError: 8.49
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: ShootLeft
+      name: Enter
       takeName: Take 001
-      firstFrame: 21
-      lastFrame: 26
+      firstFrame: 0
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -85,10 +111,38 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: ShootRight
+      name: Shoot
       takeName: Take 001
-      firstFrame: 26
-      lastFrame: 31
+      firstFrame: 15
+      lastFrame: 45
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Leave
+      takeName: Take 001
+      firstFrame: 30
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -158,10 +212,10 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
