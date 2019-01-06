@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
         {
             collissionCounter += 1;
             newCollissionCounter += 1;
+            Debug.Log("colco:" + collissionCounter);
+            Debug.Log("cnewnolco:" + newCollissionCounter);
         }
       
     }
@@ -126,9 +128,9 @@ public class PlayerController : MonoBehaviour
         {
             collissionCounter -= 1;
 
-            if(newCollissionCounter > 0)
+            if (collissionCounter == 0)
             {
-                newCollissionCounter -= 1;
+                newCollissionCounter = 0;
             }
         }
     }
