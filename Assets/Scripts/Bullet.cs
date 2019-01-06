@@ -14,12 +14,16 @@ public class Bullet : MonoBehaviour
     public int playersLooking = 0;
     int _bulletDMG;
     public bool cannonPower;
-
+    public bool hooked;
+    SphereCollider col;
+    float _baseRadius;
     void Start()
     {
         _bulletRigidbody = this.GetComponent<Rigidbody>();
         Mesh meshBullet = GetComponent<MeshFilter>().mesh;
         boundsBullet = meshBullet.bounds;
+        col = this.GetComponent<SphereCollider>();
+        _baseRadius = col.radius;
     }
 	
 	// Update is called once per frame
@@ -28,9 +32,23 @@ public class Bullet : MonoBehaviour
         //Detect bullet DMG State
         DetectBulletDMGState(cannonPower);
 
+        //check of size
+        if(hooked)
+        {
+            col.radius = _baseRadius * 3;
+        }
+        else if(col.radius != _baseRadius)
+        {
+            col.radius = _baseRadius;
+        }
+
         //OBJECT OPAKKEN
         if (currentPlayer != null)
         {
+            if(hooked)
+            {
+                hooked = false;
+            }
             _currentPlayerCtrl = currentPlayer.GetComponent<PlayerController>();
             _currentPlayerTransform = _currentPlayerCtrl.transform;
             Mesh meshPlayer = currentPlayer.GetComponent<MeshFilter>().mesh;
@@ -38,6 +56,7 @@ public class Bullet : MonoBehaviour
             //VAN WELKE PLAYER MAG IK CONTROLS ONTVANGEN
             if (_currentPlayerCtrl.objectOpgenomen == false && InGebruik == false)
             {
+                //check dat collider goe is
                 //  Debug.Log("Object wordt opgenomen");
                 Physics.IgnoreLayerCollision(9, 12, true);
                 InGebruik = true;
