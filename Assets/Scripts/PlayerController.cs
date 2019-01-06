@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     Quaternion transformold;
     Vector3 _verticalMovement = Vector3.zero;
-
-
+    public int collissionCounter = 0;
+    public int newCollissionCounter = 0;
     public string inpHorizontal = "Horizontal_P1";
     public string inpVertical = "Vertical_P1";
     public string inpJump = "Jump_P1";
@@ -109,4 +109,27 @@ public class PlayerController : MonoBehaviour
         Movement();       
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Interactable")
+        {
+            collissionCounter += 1;
+            newCollissionCounter += 1;
+        }
+      
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Interactable")
+        {
+            collissionCounter -= 1;
+
+            if(newCollissionCounter > 0)
+            {
+                newCollissionCounter -= 1;
+            }
+        }
+    }
 }

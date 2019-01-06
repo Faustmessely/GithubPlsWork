@@ -12,7 +12,9 @@ public class Bullet : MonoBehaviour
     float counterDespawn = 0;
     public bool InGebruik = false;
     public int playersLooking = 0;
-    // Use this for initialization
+    int _bulletDMG;
+    public bool cannonPower;
+
     void Start()
     {
         _bulletRigidbody = this.GetComponent<Rigidbody>();
@@ -23,7 +25,9 @@ public class Bullet : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-       
+        //Detect bullet DMG State
+        DetectBulletDMGState(cannonPower);
+
         //OBJECT OPAKKEN
         if (currentPlayer != null)
         {
@@ -76,6 +80,18 @@ public class Bullet : MonoBehaviour
         Destroy(this.gameObject);
     }
    
+    void DetectBulletDMGState(bool cannonPower)
+    {
+        if(cannonPower)
+        {
+            _bulletDMG = 50;
+        }
+        else
+        {   
+            _bulletDMG = 25;
+        }
+    }
+
     void Parent(GameObject parentOb, GameObject childOb)
     {
     childOb.transform.parent = parentOb.transform;

@@ -45,11 +45,16 @@ public class ObjectSeeker : MonoBehaviour {
         //Raycast settings    
         _hitInfo = new RaycastHit();
         _hit = Physics.Raycast(this.transform.parent.position, this.transform.parent.forward, out _hitInfo, 1000f, mask);
+        //Als character in collider zit van het object//// raycast is ni mogelijk(zelfs al sta raycast aan)/// en object position zit in de viewtrigger van de player
+        //if(this.transform.parent.co)
+        //{
+        //   // moment dat object in trigger enter is nieuwe target en zolang die trigger enter bestaat met character geen raycast
+        //}
 
         //Zoek mogelijke targets om op te nemen
-        if (_hitInfo.collider == false && _targetObject == null && _currentInteractableColliderList.Count > 0)//Selecteer dichtste object als er nog geen object is
+        if (_hitInfo.collider == false && _targetObject == null || this.GetComponentInParent<PlayerController>().newCollissionCounter > 0)//Selecteer dichtste object als er nog geen object is
         {
-
+            this.GetComponentInParent<PlayerController>().newCollissionCounter = 0;//zoek ninaar nieuwe objecten ma zolang player in 1tje staat geen
             foreach (Collider _colliderInteractable in _currentInteractableColliderList)
             {
                 Vector3 interactableDistance = _colliderInteractable.transform.position - this.transform.parent.position;
@@ -66,9 +71,9 @@ public class ObjectSeeker : MonoBehaviour {
                 }
             }
         }
-        else if (_hitInfo.collider && _currentInteractableColliderList.Count > 0)//Verschuif selectie of maak selectie als er nog geen is
+        else if (_currentInteractableColliderList.Contains(_hitInfo.collider) && this.GetComponentInParent<PlayerController>().collissionCounter <= 0)//Verschuif selectie of maak selectie als er nog geen is _hitInfo.collider && speler niet in een object zit
         {
-            if (_hitInfo.transform.gameObject != _targetObject)
+            if (_hitInfo.transform.gameObject != _targetObject)//check of het verschillend is van huidige selectie
             {
 
                 _targetObject = _hitInfo.transform.gameObject;
