@@ -1,14 +1,36 @@
 fileFormatVersion: 2
-guid: daa8c1a4884bc2c44a2a4b91ac62d932
+guid: 9531313b80c748c4aa7b47f338c1a648
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: 03 - Default
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere001
+    100000: Plane004
+    100002: Plane005
+    100004: Plane006
+    100006: Plane007
+    100008: Plane008
+    100010: //RootNode
+    400000: Plane004
+    400002: Plane005
+    400004: Plane006
+    400006: Plane007
+    400008: Plane008
+    400010: //RootNode
+    2100000: 02 - Default
+    2300000: Plane004
+    2300002: Plane005
+    2300004: Plane006
+    2300006: Plane007
+    2300008: Plane008
+    3300000: Plane004
+    3300002: Plane005
+    3300004: Plane006
+    3300006: Plane007
+    3300008: Plane008
+    4300000: Plane004
+    4300002: Plane005
+    4300004: Plane006
+    4300006: Plane007
+    4300008: Plane008
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -40,7 +62,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -59,7 +81,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
