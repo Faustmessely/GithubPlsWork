@@ -4066,8 +4066,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00807fddb26e2014497a41310f6b6300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warningDistance: 1000
-  _headSpaceMinDistance: 1000
+  _warningDistance: 2000
+  _headSpaceMinDistance: 2000
   GiveWarning: 0
   ProhibitHead: 0
 --- !u!114 &114378080853142796
@@ -4204,8 +4204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00807fddb26e2014497a41310f6b6300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warningDistance: 1000
-  _headSpaceMinDistance: 1000
+  _warningDistance: 2000
+  _headSpaceMinDistance: 2000
   GiveWarning: 0
   ProhibitHead: 0
 --- !u!114 &114826402745905914
@@ -4232,8 +4232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00807fddb26e2014497a41310f6b6300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warningDistance: 1000
-  _headSpaceMinDistance: 1000
+  _warningDistance: 2000
+  _headSpaceMinDistance: 2000
   GiveWarning: 0
   ProhibitHead: 0
 --- !u!114 &114836255371852118

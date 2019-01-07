@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e9a9f304f550419498e4f559f15c8948
+guid: ddc0d729243c49b4f8df8643d3e8d346
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -21,7 +21,7 @@ ModelImporter:
     400014: Sphere001
     2100000: 02 - Default
     4300000: Sphere001
-    7400000: Middle
+    7400000: Take 001
     9500000: //RootNode
     13700000: Sphere001
   externalObjects: {}
@@ -53,18 +53,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Middle
+      name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

@@ -15,6 +15,7 @@ public class SharkBehaviour : MonoBehaviour {
 
     [SerializeField]
     SharkActions sharkActions;
+    
 
 
     public static bool CanAct = true;
@@ -22,16 +23,21 @@ public class SharkBehaviour : MonoBehaviour {
     private void Start()
     {
         _currentPhase = _phases[_currentIndex];
+       
     }
 
     private void FixedUpdate()
     {
         _currentPhase.Invoke();
 
+        Debug.Log("phase " + _currentIndex);
+
         if(sharkActions.GoToNext)
         {
             NextPhase();
         }
+
+        
     }
 
     public void NextPhase()
@@ -43,7 +49,6 @@ public class SharkBehaviour : MonoBehaviour {
         else { _currentIndex = 0; }
         
         _currentPhase = _phases[_currentIndex];
-
 
 
     }

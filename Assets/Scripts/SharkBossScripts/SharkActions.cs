@@ -46,8 +46,21 @@ public class SharkActions : MonoBehaviour {
 
     //general
     public bool GoToNext;
-    
 
+    float _timer;
+    bool _firstTick = true;
+    public void Timer(float time)
+    {
+        if(_firstTick)
+        {
+            _timer = time;
+            _firstTick = false;
+        }
+        _timer -= Time.deltaTime;
+
+        if (_timer <= 0)
+            GoToNext = true;
+    }
 
     bool _resetCircle = true;
     public void Circle()
@@ -67,6 +80,7 @@ public class SharkActions : MonoBehaviour {
 
         transform.RotateAround(_victimLocation.position, Vector3.up, _rotationSpeed * Time.fixedDeltaTime);
     }
+
 
 
     bool _sidePicked = false;
@@ -203,6 +217,8 @@ public class SharkActions : MonoBehaviour {
         _resetCircle = true;
         GoToNext = false;
         _swapped = false;
+        _firstTick = true;
+        
     }
 
 
