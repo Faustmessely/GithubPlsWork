@@ -10,6 +10,12 @@ public class SharkBehaviour : MonoBehaviour {
     UnityEvent _currentPhase;
     int _currentIndex = 0;
 
+    [SerializeField]
+    UnityEvent _reset;
+
+    [SerializeField]
+    SharkActions sharkActions;
+
 
     public static bool CanAct = true;
 
@@ -18,20 +24,36 @@ public class SharkBehaviour : MonoBehaviour {
         _currentPhase = _phases[_currentIndex];
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _currentPhase.Invoke();
+
+        if(sharkActions.GoToNext)
+        {
+            NextPhase();
+        }
     }
 
     public void NextPhase()
     {
-        if (_phases[_currentIndex + 1] != null)
-            _currentPhase = _phases[_currentIndex + 1];
-        else _currentPhase = _phases[0];
+        ResetActions();
+
+        if (_currentIndex < _phases.Length -1)
+        { _currentIndex++; }
+        else { _currentIndex = 0; }
+        
+        _currentPhase = _phases[_currentIndex];
+
+
 
     }
 
 
+
+    private void ResetActions()
+    {
+        _reset.Invoke();
+    }
 
 
 }

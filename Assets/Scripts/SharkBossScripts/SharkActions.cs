@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SharkActions : MonoBehaviour {
 
@@ -20,10 +21,32 @@ public class SharkActions : MonoBehaviour {
     float _timeToChange = 1f;
 
     //circling
-    public Transform VictimLocation;
+    [SerializeField]
+    Transform _victimLocation;
     [SerializeField]
     float _rotationSpeed;
     Quaternion _targetDirection;
+
+    [SerializeField]
+    Transform _circlingPoint;
+
+    //biting
+    [SerializeField]
+    Transform _left;
+    [SerializeField]
+    Transform _right;
+    [SerializeField]
+    Transform _focus;
+
+    [SerializeField]
+    UnityEvent _leftPush;
+    [SerializeField]
+    UnityEvent _rightPush;
+
+
+    //general
+    public bool GoToNext;
+    
 
 
     bool _resetCircle = true;
@@ -31,25 +54,106 @@ public class SharkActions : MonoBehaviour {
     {
         if (_resetCircle)
         {
-            ManageHeight(_mediumHeight);
+
+            transform.position = _circlingPoint.position;
+            transform.rotation = _circlingPoint.rotation;
             _resetCircle = false;
         }
+
 
         SubMergeWhile(SharkObstacleDetection.Obstructed);
 
        // ManageHeight(_mediumHeight);
 
-        transform.RotateAround(VictimLocation.position, Vector3.up, 30 * Time.fixedDeltaTime);
+        transform.RotateAround(_victimLocation.position, Vector3.up, _rotationSpeed * Time.fixedDeltaTime);
     }
 
-    public void Jump()
-    {
-       
-    }
 
+    bool _sidePicked = false;
+    float _submergeLiberty = 5f;
     public void Bite()
     {
 
+
+        if (!_sidePicked)
+        {
+            PickSide();
+            _sidePicked = true;
+        }
+        if (_sidePicked)
+        {
+
+            SubMergeWhile(false);
+
+            if (transform.position.y >= _mediumHeight - _submergeLiberty)
+                Push();
+        }
+
+    }
+
+    void Push()
+    {
+
+            if (_leftSide)
+            {
+                _leftPush.Invoke();
+
+
+            }
+            else
+            {
+                _rightPush.Invoke();
+
+
+            }
+
+            if (SharkObstacleDetection.Obstructed)
+                GoToNext = true;
+        
+    }
+
+    void BitePosition(Transform newPosition)
+    {
+        transform.position = newPosition.position;
+        transform.LookAt(_focus);
+    }
+
+    bool _leftSide;
+    void PickSide()
+    {
+        if (_checkManager.AllowLeftTentacle && _checkManager.AllowRightTentacle)
+        {
+            int side = Random.Range(0, 2);
+
+            if (side == 0)
+            {
+                BitePosition(_left);
+                _leftSide = true;
+            }
+
+            else
+            {
+                BitePosition(_right);
+                _leftSide = false;
+            }
+        }
+
+        else if (_checkManager.AllowLeftTentacle)
+        {
+            BitePosition(_left);
+            _leftSide = true;
+        }
+        else if (_checkManager.AllowRightTentacle)
+        {
+            BitePosition(_right);
+            _leftSide = false;
+        }
+        else
+        {
+            _sidePicked = false;
+            GoToNext = true;
+            ChangeDirection();
+        }
     }
 
 
@@ -64,42 +168,42 @@ public class SharkActions : MonoBehaviour {
         
     }
 
-    bool ChangeDirection()
+    bool _swapped;
+  public void ChangeDirection()
     {
-        ManageHeight(_minHeight);
-        if (transform.position.y <= _minHeight)
+        if (!_swapped)
         {
-            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y + 180, transform.rotation.z, 0);
-            _rotationSpeed = -_rotationSpeed;
-            return false;
+            _circlingPoint.RotateAround(_circlingPoint.position, _circlingPoint.up, 180f);
+            
+           _rotationSpeed =- _rotationSpeed;
+
+            Debug.Log(_rotationSpeed);
+            _swapped = true;
         }
-            return true;
+        
     }
-
-
-    bool _submergeActive;
+    
     public void SubMergeWhile(bool check)
     {
         if (check)
         {
             ManageHeight(_minHeight);
-            _submergeActive = true;
         }
 
-        if (!check && _submergeActive)
+        if (!check )//&& _submergeActive)
         {
             ManageHeight(_mediumHeight);
-            if (transform.position.y >= _mediumHeight)
-            {
-                _submergeActive = false;
-            }
         }
     }
+    
 
     public void ResetAll()
     {
+        _sidePicked = false;
         _resetCircle = true;
+        GoToNext = false;
+        _swapped = false;
     }
-       
+
 
 }
