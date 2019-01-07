@@ -45,14 +45,9 @@ public class ObjectSeeker : MonoBehaviour {
         //Raycast settings    
         _hitInfo = new RaycastHit();
         _hit = Physics.Raycast(this.transform.parent.position, this.transform.parent.forward, out _hitInfo, 1000f, mask);
-        //Als character in collider zit van het object//// raycast is ni mogelijk(zelfs al sta raycast aan)/// en object position zit in de viewtrigger van de player
-        //if(this.transform.parent.co)
-        //{
-        //   // moment dat object in trigger enter is nieuwe target en zolang die trigger enter bestaat met character geen raycast
-        //}
 
         //Zoek mogelijke targets om op te nemen
-        if (_currentInteractableColliderList.Contains(this.GetComponentInParent<PlayerController>().lastObjectHit) && this.GetComponentInParent<PlayerController>().newCollissionCounter > 0)//Als player collission heeft & dit object zit ook in de view altijd de selectie
+        if (!_hit && _currentInteractableColliderList.Contains(this.GetComponentInParent<PlayerController>().lastObjectHit) && this.GetComponentInParent<PlayerController>().newCollissionCounter > 0)//Als player collission heeft & dit object zit ook in de view altijd de selectie
         {
             Debug.Log("1");
             this.GetComponentInParent<PlayerController>().newCollissionCounter = 0;

@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         boundsBullet = meshBullet.bounds;
         col = this.GetComponent<SphereCollider>();
         _baseRadius = col.radius;
-        _radiusOnHook = _baseRadius * 2.5f;
+        _radiusOnHook = _baseRadius * 3f;
     }
 	
 	// Update is called once per frame
