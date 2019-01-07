@@ -46,16 +46,25 @@ public class ObjectSeeker : MonoBehaviour {
         _hitInfo = new RaycastHit();
         _hit = Physics.Raycast(this.transform.parent.position, this.transform.parent.forward, out _hitInfo, 1000f, mask);
 
+        //
+        if(_currentInteractableColliderList.Contains(null))
+        {
+            _currentInteractableColliderList.Remove(null);
+        }
+
         //Zoek mogelijke targets om op te nemen
         if (!_hit && _currentInteractableColliderList.Contains(this.GetComponentInParent<PlayerController>().lastObjectHit) && this.GetComponentInParent<PlayerController>().newCollissionCounter > 0)//Als player collission heeft & dit object zit ook in de view altijd de selectie
         {
-            Debug.Log("1");
+           // Debug.Log("1");
             this.GetComponentInParent<PlayerController>().newCollissionCounter = 0;
-            _targetObject = this.GetComponentInParent<PlayerController>().lastObjectHit.gameObject;
+            if (this.GetComponentInParent<PlayerController>().lastObjectHit != null)
+            {
+                _targetObject = this.GetComponentInParent<PlayerController>().lastObjectHit.gameObject;
+            }
         }
         if (_currentInteractableColliderList.Count > 0 && _targetObject == null)//Er is nog geen object geselecteerd maar er zit wel een object in de view
         {
-            Debug.Log("2");
+           // Debug.Log("2");
             foreach (Collider _colliderInteractable in _currentInteractableColliderList)
             {
                 Vector3 interactableDistance = _colliderInteractable.transform.position - this.transform.parent.position;
@@ -81,7 +90,7 @@ public class ObjectSeeker : MonoBehaviour {
            
             if (_hitInfo.transform.gameObject != _targetObject)//check of het verschillend is van huidige selectie
             {
-                Debug.Log("3");
+               // Debug.Log("3");
                 _targetObject = _hitInfo.transform.gameObject;
             }
         }
@@ -90,12 +99,11 @@ public class ObjectSeeker : MonoBehaviour {
           
             if (!_currentInteractableColliderList.Contains(_targetObject.GetComponent<Collider>()) || _currentInteractableColliderList.Count <= 0)//als huidige target ni in de view zit dan deselecteer dit object
             {
-                Debug.Log("4");
+               // Debug.Log("4");
                 _targetObject = null;//TargetObject OFF
                // _smallestInteractableDistance = Vector3.zero;
             }
         }
-
     }
 
     private void IsPlayerLookingAtInteractable(GameObject TargetObject)

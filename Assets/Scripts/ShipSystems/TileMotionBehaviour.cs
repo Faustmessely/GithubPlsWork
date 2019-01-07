@@ -39,7 +39,7 @@ public class TileMotionBehaviour : MonoBehaviour
         _movement = new Vector3(0, 0, -MovementSpeed * Time.deltaTime);
         //transform.position = Vector3.MoveTowards(transform.position, RandomGeneratorBehaviour.Despawner.transform.position, MovementSpeed * Time.deltaTime);
         transform.position += _movement;
-        Debug.DrawLine(transform.position, RandomGeneratorBehaviour.Despawner.transform.position, Color.green);
+       // Debug.DrawLine(transform.position, RandomGeneratorBehaviour.Despawner.transform.position, Color.green);
     }
 
     //check after all the movement updates

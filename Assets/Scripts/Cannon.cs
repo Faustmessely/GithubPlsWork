@@ -78,7 +78,7 @@ public class Cannon : MonoBehaviour {
             {
                 Debug.Log("destroy object");
                 Destroy(collision.gameObject);
-
+             
             }
         }
     }
