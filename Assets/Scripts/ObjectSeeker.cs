@@ -46,7 +46,7 @@ public class ObjectSeeker : MonoBehaviour {
         _hitInfo = new RaycastHit();
         _hit = Physics.Raycast(this.transform.parent.position, this.transform.parent.forward, out _hitInfo, 1000f, mask);
 
-        //
+        //checken dat er geen gedelete object in de list zit
         if(_currentInteractableColliderList.Contains(null))
         {
             _currentInteractableColliderList.Remove(null);

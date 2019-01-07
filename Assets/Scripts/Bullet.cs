@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
     SphereCollider col;
     float _baseRadius;
     float _radiusOnHook;
+    Renderer _bulletRender;
     void Start()
     {
         _bulletRigidbody = this.GetComponent<Rigidbody>();
@@ -26,11 +27,18 @@ public class Bullet : MonoBehaviour
         col = this.GetComponent<SphereCollider>();
         _baseRadius = col.radius;
         _radiusOnHook = _baseRadius * 3f;
+        _bulletRender = this.GetComponent<Renderer>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        //If bullet is out of the camera delete it werkt enkel in build editor heeft zelf ook een camera
+        if (!_bulletRender.isVisible)
+        {
+            Destroy(this.gameObject);
+        }
+
         //Detect bullet DMG State
         DetectBulletDMGState(cannonPower);
 
