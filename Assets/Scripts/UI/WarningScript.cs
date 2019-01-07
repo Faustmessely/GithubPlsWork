@@ -10,18 +10,13 @@ public class WarningScript : MonoBehaviour {
 
     [SerializeField]
     CheckManager checkManager;
-
-    Color _color;
+    
 
     [SerializeField]
     float _flickerSpeed = 0.1f;
     float _timer;
     bool _fadeIn;
-
-    private void Start()
-    {
-        _color = _warningSign.color;
-    }
+    
 
     private void Update()
     {
