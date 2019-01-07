@@ -768,6 +768,11 @@ Prefab:
       propertyPath: m_Size.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114392899473871874, guid: b7e900d7d163c854c9dc04dca70ccd7a,
+        type: 2}
+      propertyPath: _rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e900d7d163c854c9dc04dca70ccd7a, type: 2}
   m_IsPrefabAsset: 0
