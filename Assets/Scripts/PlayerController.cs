@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool isInputActive = true;
     bool _interactableNearby = false;
     public bool objectOpgenomen = false;
+    public Collider lastObjectHit;
 
     private void Start()
     {
@@ -114,10 +115,12 @@ public class PlayerController : MonoBehaviour
     {
         if(other.tag == "Interactable")
         {
+            lastObjectHit = other;
+
             collissionCounter += 1;
             newCollissionCounter += 1;
-            Debug.Log("colco:" + collissionCounter);
-            Debug.Log("cnewnolco:" + newCollissionCounter);
+            //Debug.Log("colco:" + collissionCounter);
+            //Debug.Log("cnewnolco:" + newCollissionCounter);
         }
       
     }

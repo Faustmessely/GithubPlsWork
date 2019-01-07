@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
     public bool hooked;
     SphereCollider col;
     float _baseRadius;
+    float _radiusOnHook;
     void Start()
     {
         _bulletRigidbody = this.GetComponent<Rigidbody>();
@@ -24,6 +25,7 @@ public class Bullet : MonoBehaviour
         boundsBullet = meshBullet.bounds;
         col = this.GetComponent<SphereCollider>();
         _baseRadius = col.radius;
+        _radiusOnHook = _baseRadius * 2.5f;
     }
 	
 	// Update is called once per frame
@@ -33,11 +35,11 @@ public class Bullet : MonoBehaviour
         DetectBulletDMGState(cannonPower);
 
         //check of size
-        if(hooked)
+        if(hooked && col.radius != _radiusOnHook)
         {
-            col.radius = _baseRadius * 3;
+            col.radius = _radiusOnHook;
         }
-        else if(col.radius != _baseRadius)
+        else if(!hooked && col.radius != _baseRadius)
         {
             col.radius = _baseRadius;
         }
