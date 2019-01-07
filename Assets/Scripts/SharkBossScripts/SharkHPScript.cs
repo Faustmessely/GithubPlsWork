@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class SharkHPScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static float Health = 1000;
+
+    public void ReduceHP(float amount)
+    {
+        Health -= amount;
+    }
 }

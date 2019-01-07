@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 4896860598152668}
   - component: {fileID: 54210826205773170}
   - component: {fileID: 65860592563407272}
+  - component: {fileID: 114995906620385690}
   - component: {fileID: 114208842790860898}
-  - component: {fileID: 114158377955103832}
   - component: {fileID: 114379414495270308}
   - component: {fileID: 114630814273388426}
   m_Layer: 0
@@ -207,6 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4351148770397926}
+  - component: {fileID: 114401797419572566}
   m_Layer: 0
   m_Name: Shark Boss
   m_TagString: Untagged
@@ -469,17 +470,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114158377955103832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1343132098728496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d64e1eb4b52909d46a87ea3ec7c975fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114208842790860898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -547,6 +537,18 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   GoToNext: 0
+--- !u!114 &114401797419572566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939956916071504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64e1eb4b52909d46a87ea3ec7c975fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1000
 --- !u!114 &114630814273388426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -647,6 +649,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   sharkActions: {fileID: 114379414495270308}
+--- !u!114 &114995906620385690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343132098728496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cfd4f36e3904d4eb2a9d073a39a199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137689051087467452
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
