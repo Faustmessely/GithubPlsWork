@@ -91184,7 +91184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 4913455446861572}
   _defaultDistance: 100
-  _rotX: 25
+  _rotX: 30
 --- !u!114 &114240248018494728
 MonoBehaviour:
   m_ObjectHideFlags: 1
