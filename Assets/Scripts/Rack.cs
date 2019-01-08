@@ -9,6 +9,7 @@ public class Rack : MonoBehaviour {
     [SerializeField] GameObject[] positions;
     //[SerializeField] Collider Trigger;
     List<GameObject> _bulletsInChest;
+    List<GameObject> _bulletsInCollider;
     GameObject _currentBullet;
     int _previousStack = 0;
     public Text fpsText;
@@ -16,6 +17,7 @@ public class Rack : MonoBehaviour {
     // Use this for initialization
     void Start() {
         _bulletsInChest = new List<GameObject>();
+        _bulletsInCollider = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -28,23 +30,32 @@ public class Rack : MonoBehaviour {
 
     }
 
+    void AddChestItem()
+    {
+        //Check of kist al vol is
+       if( _bulletsInChest.Count < _maxStack)
+        
+        //check of er colliders in de lijst zitten dat ni in de kist zitten
+
+        //voeg random bullets toe
+        if (!_currentBullet.gameObject.GetComponent<Bullet>().InGebruik && _bulletsInChest.Count < _maxStack)//Als object ni in gebruik is en er is plaats voeg toe aan chest
+        {
+            _currentBullet
+        }
+        //als er plaats is direkt toevoegen aan chest
+    }
 
     void BulletPlacement()
     {
-
-
-
-
-
-       // Debug.Log(_bulletsInChest.Count + " " + _previousStack);
-        if (_bulletsInChest.Count > _previousStack)//enkel position aanpassen als count verhoogd maar niet als die verlaagd
-        {
+            // Debug.Log(_bulletsInChest.Count + " " + _previousStack);
+            if (_bulletsInChest.Count > _previousStack)//enkel position aanpassen als chest count verhoogd maar niet als die verlaagd
+            {
         
-            _currentBullet.GetComponent<Rigidbody>().isKinematic = true;
-            _currentBullet.transform.position = positions[_bulletsInChest.Count].transform.position;
-            _previousStack = _bulletsInChest.Count;
-         //   Debug.Log(_bulletsInChest.Count + " " + _previousStack);
-        }
+                _currentBullet.GetComponent<Rigidbody>().isKinematic = true;
+                _currentBullet.transform.position = positions[_bulletsInChest.Count].transform.position;
+                _previousStack = _bulletsInChest.Count;
+             //   Debug.Log(_bulletsInChest.Count + " " + _previousStack);
+            }
 
     }
 
@@ -53,18 +64,15 @@ public class Rack : MonoBehaviour {
        
         if (col.transform.name == "Bullet")
         {
-            //als bullet niet is opgepakt en hij is in de trigger van de rack dan kan wordt hij opgeslagen indien er plaats is
-            if (!col.gameObject.GetComponent<Bullet>().InGebruik)
+            _bulletsInCollider.Add(col.gameObject);
+            if (!col.gameObject.GetComponent<Bullet>().InGebruik && _bulletsInChest.Count < _maxStack)
             {
-                if (_bulletsInChest.Count < _maxStack)
-                {
-                    _currentBullet = col.gameObject;
-                    // Physics.IgnoreCollision(_currentBullet.GetComponent<Collider>(), colRackTrigger.gameObject.transform.GetChild(0).GetComponent<Collider>(), true);
-                    _bulletsInChest.Add(col.transform.gameObject);
-                    Debug.Log("stack count " + _bulletsInChest.Count);
-                }
-            }
+                _bulletsInChest.Add(_currentBullet.transform.gameObject);
+            }          
         }
+
+
+
     }
 
 
@@ -73,6 +81,11 @@ public class Rack : MonoBehaviour {
         //Voeg de distance vector toe van elk collision object waarbij de tag Interactable is en als er nog geen targetObject geselecteerd is  
         if (col.transform.name == "Bullet")
         {
+            if(_bulletsInCollider.Contains(col.gameObject))
+            {
+                _bulletsInCollider.Remove(col.gameObject);
+            }
+
             if (_bulletsInChest.Contains(col.gameObject))
             {             
                 _bulletsInChest.Remove(col.gameObject);
