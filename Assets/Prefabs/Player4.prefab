@@ -147,6 +147,8 @@ MonoBehaviour:
   speed: 60
   jumpSpeed: 3
   gravity: 9
+  collissionCounter: 0
+  newCollissionCounter: 0
   inpHorizontal: Horizontal_P4
   inpVertical: Vertical_P4
   inpJump: Jump_P4
@@ -161,6 +163,7 @@ MonoBehaviour:
   action: 1
   isInputActive: 1
   objectOpgenomen: 0
+  lastObjectHit: {fileID: 0}
 --- !u!114 &114321491357033582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf0488b71cbba409b9657b60aaff7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPos: {fileID: 0}
+  _spawnPos: {fileID: 1992293538647118, guid: aefd9616f68045244910623a00a29786, type: 2}
 --- !u!143 &143397205660451156
 CharacterController:
   m_ObjectHideFlags: 1

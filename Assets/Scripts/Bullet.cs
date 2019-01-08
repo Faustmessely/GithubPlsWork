@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
                 //  Debug.Log("Object wordt opgenomen");
                 Physics.IgnoreLayerCollision(9, 12, true);
                 InGebruik = true;
-                GetComponent<Rigidbody>().isKinematic = true;
+                _bulletRigidbody.isKinematic = true;
                 Parent(currentPlayer, this.transform.gameObject);
                 this.transform.position = new Vector3(0, boundsPlayer.extents.y * _currentPlayerCtrl.transform.localScale.y,0)+ new Vector3(0, boundsBullet.extents.y * this.transform.localScale.y, 0) + _currentPlayerCtrl.transform.position;
                 _currentPlayerCtrl.objectOpgenomen = true;
@@ -81,7 +81,7 @@ public class Bullet : MonoBehaviour
             {
                 // Debug.Log("Object wordt losgelaten");
                 InGebruik = false;
-                GetComponent<Rigidbody>().isKinematic = false;
+                _bulletRigidbody.isKinematic = false;
                 this.transform.position = _currentPlayerTransform.position + (_currentPlayerCtrl.transform.forward * 5f);
                 this.transform.parent = null;//parent weg zonder detach   
                 _currentPlayerCtrl.objectOpgenomen = false;
@@ -93,7 +93,7 @@ public class Bullet : MonoBehaviour
             {
                 //  Debug.Log("Object ffkes weggooien");
                 InGebruik = false;
-                GetComponent<Rigidbody>().isKinematic = false;
+                _bulletRigidbody.isKinematic = false;
                 this.transform.parent = null;//parent weg zonder detach
                 _bulletRigidbody.AddForce(_currentPlayerCtrl.transform.forward * 500f, ForceMode.Impulse);
                 _currentPlayerCtrl.objectOpgenomen = false;
