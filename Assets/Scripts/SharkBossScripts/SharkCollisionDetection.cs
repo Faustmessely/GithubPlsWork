@@ -8,12 +8,13 @@ public class SharkCollisionDetection : MonoBehaviour {
     [SerializeField]
     UnityEvent _onHit;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if(other.name == "Bullet")
+        if(other.gameObject.name == "Bullet")
         {
             _onHit.Invoke();
-            //Destroy(other.gameObject);
+            Destroy(other.gameObject);
+            
         }
     }
 }

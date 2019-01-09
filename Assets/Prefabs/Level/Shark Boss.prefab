@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4896860598152668}
   - component: {fileID: 54210826205773170}
+  - component: {fileID: 136449196173651576}
   - component: {fileID: 65860592563407272}
   - component: {fileID: 114995906620385690}
   - component: {fileID: 114208842790860898}
@@ -548,6 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64e1eb4b52909d46a87ea3ec7c975fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _setMaxHP: 1000
 --- !u!114 &114630814273388426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -774,6 +776,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!136 &136449196173651576
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343132098728496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 41.6
+  m_Height: 288.8
+  m_Direction: 2
+  m_Center: {x: 0, y: 68.5, z: -9.1}
 --- !u!137 &137689051087467452
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
