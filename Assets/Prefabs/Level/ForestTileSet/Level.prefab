@@ -93387,7 +93387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkManager: {fileID: 114227475597469738}
-  ShipHitPoints: 10000
+  ShipHitPoints: 1000
 --- !u!114 &114891701958111036
 MonoBehaviour:
   m_ObjectHideFlags: 1

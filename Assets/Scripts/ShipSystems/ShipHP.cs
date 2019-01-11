@@ -12,14 +12,19 @@ public class ShipHP : MonoBehaviour {
 
     public float ShipHitPoints = 1000;
 
+    public bool shipInfiniteHP = false;
+
     private void Update()
     {
         if (_checkManager.ShipObstacleCollision)
             DoHitObstacle();
         if (_checkManager.ShipWallCollision)
             DoHitWall();
-        if (ShipHitPoints < 0)
-            Lose();
+
+        if(shipInfiniteHP)
+        {
+            ShipHitPoints = 10000;
+        }
     }
 
     void DoHitWall()
@@ -32,9 +37,5 @@ public class ShipHP : MonoBehaviour {
         ShipHitPoints -= _obstacleDamage;
         Debug.Log("Hit");
     }
-
-    void Lose()
-    {
-        Debug.Log("You Lose");
-    }
+    
 }
