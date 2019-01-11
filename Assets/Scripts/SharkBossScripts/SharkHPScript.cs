@@ -7,6 +7,9 @@ public class SharkHPScript : MonoBehaviour {
     [SerializeField]
     float _setMaxHP = 1000;
 
+    [SerializeField]
+    Healthpoints healthPoints;
+
     public static float Health = 1000;
 
     private void Start()
@@ -17,5 +20,10 @@ public class SharkHPScript : MonoBehaviour {
     public void ReduceHP(float amount)
     {
         Health -= amount;
+    }
+
+    private void Update()
+    {
+        healthPoints.maxHealth = (int)Health;
     }
 }
