@@ -37,8 +37,5 @@ public class PlayersCheck : MonoBehaviour {
             Instantiate(players[3], spawnPoint.transform.position, Quaternion.identity);
             SceneInfoSave.player4Active = false;
         }
-        
-        Destroy(this.gameObject);
-
     }
 }

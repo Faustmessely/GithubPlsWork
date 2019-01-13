@@ -12,18 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3d0e14b14ee48324182647e2289b19e5
   - enabled: 1
+    path: Assets/Scenes/PlayerSelection.unity
+    guid: 9cd32bdff8999b847bb232a551f9b8e4
+  - enabled: 1
     path: Assets/Scenes/LevelCreation.unity
     guid: ca7a492066e6d1f44aa78924fddddd37
   - enabled: 1
     path: Assets/Scenes/Levels/Level3.unity
     guid: c1b7429d603cb1b4f90d4e6481efabd2
   - enabled: 1
-    path: Assets/Scenes/Brian.unity
-    guid: 669e3509bd8ee4c4aacc0c6b38962627
-  - enabled: 1
-    path: Assets/Scenes/PlayerSelection.unity
-    guid: 9cd32bdff8999b847bb232a551f9b8e4
-  - enabled: 1
     path: Assets/Scenes/Levels/Level2.unity
     guid: a3c8be1eef960df4caec099f9cd8639b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: 9bcf397d69e829a4bb2b58f8f6ab8202
   m_configObjects: {}
