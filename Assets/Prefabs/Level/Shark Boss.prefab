@@ -500,7 +500,7 @@ MonoBehaviour:
   _maxHeight: 0
   _timeToChange: 1.5
   _victimLocation: {fileID: 0}
-  _rotationSpeed: 30
+  _rotationSpeed: 20
   _circlingPoint: {fileID: 4159533967709340}
   _left: {fileID: 4894477168280352}
   _right: {fileID: 4874919549305634}
@@ -550,6 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _setMaxHP: 1000
+  healthPoints: {fileID: 0}
 --- !u!114 &114630814273388426
 MonoBehaviour:
   m_ObjectHideFlags: 1
