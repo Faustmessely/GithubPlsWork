@@ -9,13 +9,14 @@ public class Tentacle : MonoBehaviour
     float timer = 0;
     float _attackTimer = 0;
     bool _spawnProcess = false;
-    int _tentacleHp = 50;
+   public int _tentacleHp = 50;
     public bool despawnTentacle = false;
     BossSpawningBehavior _boss;
     Healthpoints _healthPoints;
     Animation anim;
     ShipHP ship;
     int _aanvalRnd;
+
     // Use this for initialization
     void Start ()
     {
@@ -25,14 +26,14 @@ public class Tentacle : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-       
+
         _boss = transform.parent.gameObject.GetComponent<BossSpawningBehavior>();
         _healthPoints = transform.parent.gameObject.GetComponent<Healthpoints>();
         if (Merged == false && _spawnProcess == false && _boss.tentaclesMerged < _boss.maxTentaclesMergedAllowed)
         {
             timer = 0;
             timer = Random.Range(1, 8);
-            _aanvalRnd = Random.Range(3, 6);
+            _aanvalRnd = Random.Range(6, 12);
             _spawnProcess = true;
         }
         else if(Merged == false && _spawnProcess == true && _boss.tentaclesMerged < _boss.maxTentaclesMergedAllowed)
@@ -63,7 +64,7 @@ public class Tentacle : MonoBehaviour
                 Merged = false;
                 _boss.tentaclesMerged -= 1;
                 ship = GameObject.FindGameObjectWithTag("Ship").GetComponent<ShipHP>();
-                ship.ShipHitPoints -= 150;
+                ship.ShipHitPoints -= 25;
             }
         }
         else if(Merged && _tentacleHp <= 0)//ALS TENTACLE MERGED IS EN HP IS 0 DAN DESPAWN

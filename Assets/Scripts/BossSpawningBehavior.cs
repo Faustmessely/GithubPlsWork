@@ -24,6 +24,7 @@ public class BossSpawningBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(tentaclesMerged);
         //ronde 1 spawn alle tentacles - als tentacle 10sec ni geraakt wordt val aan 50hp kanon doet 50 los object 25
         //Laad bools in die aantonen of de tentacles of head kunnen komen
         _checkSpawn = GameObject.FindGameObjectWithTag("CheckManager").GetComponent<CheckManager>();
@@ -36,11 +37,13 @@ public class BossSpawningBehavior : MonoBehaviour
             if (tentacles[2].GetComponent<Tentacle>().Merged)
             {
                 tentacles[2].GetComponent<Tentacle>().despawnTentacle = true;
+                tentacles[2].GetComponent<Tentacle>()._tentacleHp = 0;
             }
 
             if (tentacles[3].GetComponent<Tentacle>().Merged)
             {
                 tentacles[3].GetComponent<Tentacle>().despawnTentacle = true;
+                tentacles[3].GetComponent<Tentacle>()._tentacleHp = 0;
             }
         }
 
@@ -49,19 +52,21 @@ public class BossSpawningBehavior : MonoBehaviour
             if (tentacles[0].GetComponent<Tentacle>().Merged)
             {
                 tentacles[0].GetComponent<Tentacle>().despawnTentacle = true;
+                tentacles[0].GetComponent<Tentacle>()._tentacleHp = 0;
             }
 
             if (tentacles[1].GetComponent<Tentacle>().Merged)
             {
                 tentacles[1].GetComponent<Tentacle>().despawnTentacle = true;
+                tentacles[1].GetComponent<Tentacle>()._tentacleHp = 0;
             }
         }
 
-        if (_allowSquidHead)
-        {
-            //submerge head
-            //alive false
-        }
+        //if (_allowSquidHead)
+        //{
+        //    //submerge head
+        //    //alive false
+        //}
        
         //ifhead ga naar beneden
         //foreach (GameObject tentacle in tentacles)
