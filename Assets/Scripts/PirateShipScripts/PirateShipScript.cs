@@ -8,7 +8,7 @@ public class PirateShipScript : MonoBehaviour {
     float timer = 0;
     float _attackTimer = 0;
     bool _spawnProcess = false;
-    int _ShipHp = 150;
+    public int _ShipHp = 150;
     public bool despawnBoat = false;
     PirateShipSpawningBehaviour _boss;
     Healthpoints _healthPoints;

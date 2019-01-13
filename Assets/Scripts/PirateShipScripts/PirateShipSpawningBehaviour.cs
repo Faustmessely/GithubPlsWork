@@ -28,6 +28,7 @@ public class PirateShipSpawningBehaviour : MonoBehaviour
             if (directions[1].GetComponent<PirateShipScript>().Active)
             {
                 directions[1].GetComponent<PirateShipScript>().despawnBoat = true;
+                directions[1].GetComponent<PirateShipScript>()._ShipHp = 0;
             }
         }
 
@@ -36,6 +37,7 @@ public class PirateShipSpawningBehaviour : MonoBehaviour
             if (directions[0].GetComponent<PirateShipScript>().Active)
             {
                 directions[0].GetComponent<PirateShipScript>().despawnBoat = true;
+                directions[0].GetComponent<PirateShipScript>()._ShipHp = 0;
             }            
         }
     }
