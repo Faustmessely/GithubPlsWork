@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     float counterDespawn = 0;
     public bool InGebruik = false;
     public int playersLooking = 0;
-    int _bulletDMG;
+    public int _bulletDMG;
     public bool cannonPower;
     public bool hooked;
     SphereCollider col;

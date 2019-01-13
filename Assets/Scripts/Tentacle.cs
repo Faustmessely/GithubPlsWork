@@ -96,7 +96,7 @@ public class Tentacle : MonoBehaviour
         if (other.name == "Bullet" && Merged)
         {
             Debug.Log("dood");
-            _tentacleHp -= 50;
+            _tentacleHp -= other.GetComponent<Bullet>()._bulletDMG;
             _healthPoints.maxHealth -= 50;
         }
     }
