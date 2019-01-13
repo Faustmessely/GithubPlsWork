@@ -464,6 +464,26 @@ Prefab:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 1159852888}
+    - target: {fileID: 114167865343324454, guid: 0775fccbc7c5b084cbf7bab83e3ad0d8,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224395099550354668, guid: 0775fccbc7c5b084cbf7bab83e3ad0d8,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -168
+      objectReference: {fileID: 0}
+    - target: {fileID: 224081225728153384, guid: 0775fccbc7c5b084cbf7bab83e3ad0d8,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -168
+      objectReference: {fileID: 0}
+    - target: {fileID: 224923258391142256, guid: 0775fccbc7c5b084cbf7bab83e3ad0d8,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0775fccbc7c5b084cbf7bab83e3ad0d8, type: 2}
   m_IsPrefabAsset: 0

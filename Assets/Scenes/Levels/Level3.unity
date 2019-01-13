@@ -2644,6 +2644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _checkManager: {fileID: 1614313412}
   ShipHitPoints: 10000
+  shipInfiniteHP: 0
 --- !u!1 &852955214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,6 +2809,11 @@ Prefab:
       propertyPath: Turning
       value: 
       objectReference: {fileID: 1227347468}
+    - target: {fileID: 114261048981382718, guid: be4f4f0c0f7720d428511bbfba67c582,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be4f4f0c0f7720d428511bbfba67c582, type: 2}
   m_IsPrefabAsset: 0

@@ -21,7 +21,7 @@ public class LevelCreation : MonoBehaviour {
     float _horizontalDirection;
     public EventSystem eventSystem;
     StandaloneInputModule standAloneInputModule;
-    public string level1, level2, level3;
+   // public string level1, level2, level3;
     
     //Delay
     float _delay;

@@ -539,6 +539,7 @@ RectTransform:
   - {fileID: 694826007}
   - {fileID: 406261385}
   - {fileID: 1755953301}
+  - {fileID: 1465097092}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -671,7 +672,7 @@ MonoBehaviour:
   m_SubmitButton: Jump_P1
   m_CancelButton: Interact_P1
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.2
+  m_RepeatDelay: 0.3
   m_ForceModuleActive: 0
 --- !u!114 &1465097091
 MonoBehaviour:
@@ -693,12 +694,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1465097089}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -399.99997, y: -224.8175, z: 0}
+  m_LocalScale: {x: 1.1678832, y: 1.1678832, z: 1.1678832}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1022419512}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1755953300
 GameObject:
