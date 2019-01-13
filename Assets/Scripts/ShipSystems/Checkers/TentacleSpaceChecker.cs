@@ -5,19 +5,30 @@ using UnityEngine;
 public class TentacleSpaceChecker : MonoBehaviour {
 
     public bool Space = true;
+    float _timer;
+    float _timerMax = 1f;
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
         {
             Space = false;
+            _timer = 0;
+
         }
 
     }
 
-    private void OnTriggerExit(Collider other)
+    private void FixedUpdate()
     {
-        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
+        if (_timer >= _timerMax)
+        {
             Space = true;
+
+        }
+        else
+        {
+            _timer += Time.fixedDeltaTime;
+        }
     }
 }
