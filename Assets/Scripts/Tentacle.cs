@@ -21,14 +21,15 @@ public class Tentacle : MonoBehaviour
     void Start ()
     {
         anim = this.GetComponent<Animation>();
+
+        _boss = transform.parent.gameObject.GetComponent<BossSpawningBehavior>();
+        _healthPoints = transform.parent.gameObject.GetComponent<Healthpoints>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
 
-        _boss = transform.parent.gameObject.GetComponent<BossSpawningBehavior>();
-        _healthPoints = transform.parent.gameObject.GetComponent<Healthpoints>();
         if (Merged == false && _spawnProcess == false && _boss.tentaclesMerged < _boss.maxTentaclesMergedAllowed)
         {
             timer = 0;
@@ -106,5 +107,6 @@ public class Tentacle : MonoBehaviour
                 _healthPoints.maxHealth -= other.GetComponent<Bullet>()._bulletDMG;
             }
         }
+        Destroy(other.gameObject);
     }
 }
