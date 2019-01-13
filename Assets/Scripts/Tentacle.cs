@@ -64,7 +64,7 @@ public class Tentacle : MonoBehaviour
                 Merged = false;
                 _boss.tentaclesMerged -= 1;
                 ship = GameObject.FindGameObjectWithTag("Ship").GetComponent<ShipHP>();
-                ship.ShipHitPoints -= 25;
+                ship.ShipHitPoints -= 50;
             }
         }
         else if(Merged && _tentacleHp <= 0)//ALS TENTACLE MERGED IS EN HP IS 0 DAN DESPAWN
@@ -97,7 +97,14 @@ public class Tentacle : MonoBehaviour
         {
             Debug.Log("dood");
             _tentacleHp -= other.GetComponent<Bullet>()._bulletDMG;
-            _healthPoints.maxHealth -= 50;
+            if (_tentacleHp < 0)
+            {
+                _healthPoints.maxHealth -= 25;
+            }
+            else
+            {
+                _healthPoints.maxHealth -= other.GetComponent<Bullet>()._bulletDMG;
+            }
         }
     }
 }

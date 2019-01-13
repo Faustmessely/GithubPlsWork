@@ -50122,7 +50122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkManager: {fileID: 917533532}
-  ShipHitPoints: 1000
+  ShipHitPoints: 2000
   shipInfiniteHP: 0
 --- !u!1 &1060506378
 GameObject:
